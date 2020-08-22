@@ -16,8 +16,8 @@ data Color = RGB Int Int Int
 
 printColor :: Maybe Color -> String
 printColor = case _ of
-  Just (RGB r g b) -> "rgb(" <> (joinWith "," $ map show [r, g, b]) <> ")"
-  Just (RGBA r g b o) -> "rgba(" <> (joinWith "," $ map show [r, g, b]) <> "," <> show o <> ")"
+  Just (RGB r_ g_ b_) -> "rgb(" <> (joinWith "," $ map show [r_, g_, b_]) <> ")"
+  Just (RGBA r_ g_ b_ o) -> "rgba(" <> (joinWith "," $ map show [r_, g_, b_]) <> "," <> show o <> ")"
   Nothing -> "None"
 
 data Transform
@@ -142,18 +142,18 @@ printBaseline = case _ of
 
 printTransform :: Transform -> String
 printTransform = case _ of
-  Matrix a b c d e f ->
-    "matrix(" <> (joinWith "," $ map show [a, b, c, d, e, f]) <> ")"
-  Translate x y ->
-    "translate(" <> (joinWith "," $ map show [x, y]) <> ")"
-  Scale x y ->
-    "scale(" <> (joinWith "," $ map show [x, y]) <> ")"
-  Rotate a x y ->
-    "rotate(" <> (joinWith "," $ map show [a, x, y]) <> ")"
-  SkewX a ->
-    "skewX(" <> show a <> ")"
-  SkewY a ->
-    "skewY(" <> show a <> ")"
+  Matrix a_ b_ c_ d_ e_ f_ ->
+    "matrix(" <> (joinWith "," $ map show [a_, b_, c_, d_, e_, f_]) <> ")"
+  Translate x_ y_ ->
+    "translate(" <> (joinWith "," $ map show [x_, y_]) <> ")"
+  Scale x_ y_ ->
+    "scale(" <> (joinWith "," $ map show [x_, y_]) <> ")"
+  Rotate a_ x_ y_ ->
+    "rotate(" <> (joinWith "," $ map show [a_, x_, y_]) <> ")"
+  SkewX a_ ->
+    "skewX(" <> show a_ <> ")"
+  SkewY a_ ->
+    "skewY(" <> show a_ <> ")"
 
 data D = Rel Command | Abs Command
 
@@ -178,23 +178,23 @@ data Command
 
 printCommand :: Command -> {command :: String, params :: String}
 printCommand = case _ of
-  M x y ->
-    {command: "m", params: joinWith "," $ map show [x, y]}
-  L x y ->
-    {command: "l", params: joinWith "," $ map show [x, y]}
-  C x1 y1 x2 y2 x y ->
-    {command: "c" , params: joinWith "," $ map show [x1, y1, x2, y2, x, y]}
-  S x2 y2 x y ->
-    {command: "s" , params: joinWith "," $ map show [x2, y2, x, y]}
-  Q x1 y1 x y ->
-    {command: "q" , params: joinWith "," $ map show [x1, y1, x, y]}
-  T x y ->
-    {command: "t", params: joinWith "," $ map show [x, y]}
-  A rx ry rot large sweep x y ->
+  M x_ y_ ->
+    {command: "m", params: joinWith "," $ map show [x_, y_]}
+  L x_ y_ ->
+    {command: "l", params: joinWith "," $ map show [x_, y_]}
+  C x1_ y1_ x2_ y2_ x_ y_ ->
+    {command: "c" , params: joinWith "," $ map show [x1_, y1_, x2_, y2_, x_, y_]}
+  S x2_ y2_ x_ y_ ->
+    {command: "s" , params: joinWith "," $ map show [x2_, y2_, x_, y_]}
+  Q x1_ y1_ x_ y_ ->
+    {command: "q" , params: joinWith "," $ map show [x1_, y1_, x_, y_]}
+  T x_ y_ ->
+    {command: "t", params: joinWith "," $ map show [x_, y_]}
+  A rx_ ry_ rot large sweep x_ y_ ->
     {command: "a", params: joinWith ","
-                 $ map show [ rx, ry, rot ]
+                 $ map show [ rx_, ry_, rot ]
                  <> [ large_flag, sweep_flag ]
-                 <> map show [ x, y ]}
+                 <> map show [ x_, y_ ]}
     where
     large_flag = if large then "0" else "1"
     sweep_flag = if sweep then "0" else "1"
@@ -231,15 +231,15 @@ r :: forall s i. Number -> IProp (r :: Number | s) i
 r = attr (AttrName "r") <<< show
 
 viewBox :: forall r i. Number -> Number -> Number -> Number -> IProp (viewBox :: String | r) i
-viewBox x y w h = attr (AttrName "viewBox") (joinWith " " $ map show [x, y, w, h])
+viewBox x_ y_ w h = attr (AttrName "viewBox") (joinWith " " $ map show [x_, y_, w, h])
 
-preserveAspectRatio :: forall r i. Maybe {x :: Align, y :: Align} -> MeetOrSlice -> IProp (preserveAspectRatio :: String | r) i
+preserveAspectRatio :: forall r i. Maybe {x_ :: Align, y_ :: Align} -> MeetOrSlice -> IProp (preserveAspectRatio :: String | r) i
 preserveAspectRatio align slice =
   attr (AttrName "preserveAspectRatio") (joinWith " " $ [align_str, printMeetOrSlice slice])
   where
     align_str = case align of
       Nothing -> "none"
-      Just {x, y} -> joinWith "" $ ["x", printAlign x, "Y", printAlign y]
+      Just {x_, y_} -> joinWith "" $ ["x", printAlign x_, "Y", printAlign y_]
 
 rx :: forall r i. Number -> IProp (rx :: Number | r) i
 rx = attr (AttrName "rx") <<< show
@@ -374,7 +374,7 @@ begin = attr (AttrName "begin")
 repeatCount :: forall r i. Int -> IProp (repeatCount :: Int | r) i
 repeatCount = attr (AttrName "repeatCount") <<< show
 
--- TODO this is just 'fill', but that functino is already specialised to Color in this module
+-- TODO this is just 'fill', but that function is already specialised to Color in this module
 fillAnim :: forall r i. FillState -> IProp (fill :: String | r) i
 fillAnim = attr (AttrName "fill") <<< printFillState
 
