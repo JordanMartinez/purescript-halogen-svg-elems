@@ -1,22 +1,21 @@
 module Halogen.Svg.Elements where
+
 -- Like Halogen.HTML.Elements
-
 import Prelude
-
-import Halogen.Svg.Core as Core
-
 import Halogen.HTML.Core (HTML, Prop, ElemName(ElemName))
 import Halogen.HTML.Elements (Node, Leaf)
 import Halogen.HTML.Properties (IProp)
-import Unsafe.Coerce (unsafeCoerce)
+import Halogen.Svg.Core as Core
 import Halogen.Svg.Indexed as I
+import Unsafe.Coerce (unsafeCoerce)
 
 element :: forall r p i. ElemName -> Array (IProp r i) -> Array (HTML p i) -> HTML p i
 element = coe Core.element
   where
-    coe :: (ElemName -> Array (Prop i) -> Array (HTML p i) -> HTML p i)
-        -> ElemName -> Array (IProp r i) -> Array (HTML p i) -> HTML p i
-    coe = unsafeCoerce
+  coe ::
+    (ElemName -> Array (Prop i) -> Array (HTML p i) -> HTML p i) ->
+    ElemName -> Array (IProp r i) -> Array (HTML p i) -> HTML p i
+  coe = unsafeCoerce
 
 svg :: forall p i. Node I.SVGsvg p i
 svg = element $ ElemName "svg"
@@ -42,7 +41,7 @@ line props = element (ElemName "line") props []
 text :: forall p i. Node I.SVGtext p i
 text = element (ElemName "text")
 
-foreignObject :: forall p i . Node I.SVGforeignObject p i
+foreignObject :: forall p i. Node I.SVGforeignObject p i
 foreignObject = element (ElemName "foreignObject")
 
 defs :: forall p i. Node I.SVGg p i
@@ -51,8 +50,10 @@ defs = element $ ElemName "defs"
 marker :: forall p i. Node I.SVGmarker p i
 marker = element $ ElemName "marker"
 
---------------------------------------------------------------------------------
+image :: forall p i. Node I.SVGimage p i
+image = element $ ElemName "image"
 
+--------------------------------------------------------------------------------
 animate :: forall p i. Leaf I.SVGanimate p i
 animate props = element (ElemName "animate") props []
 
@@ -69,6 +70,5 @@ mpath :: forall p i. Leaf I.SVGmpath p i
 mpath props = element (ElemName "mpath") props []
 
 --------------------------------------------------------------------------------
-
 title :: forall p i. Node I.SVGtitle p i
 title = element (ElemName "title")
