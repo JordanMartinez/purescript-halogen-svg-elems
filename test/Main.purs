@@ -14,6 +14,5 @@ render state =
   SE.svg [ SA.viewBox 0.0 0.0 100.0 100.0 ] [ SE.circle [ SA.r 10.0 ] ]
 
 -- not a real test, just making sure things compile
-
 main :: Effect Unit
 main = log "Nothing to see here"
