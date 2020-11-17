@@ -1,23 +1,22 @@
 module Halogen.Svg.Attributes where
--- Like Halogen.HTML.Properties
 
+-- Like Halogen.HTML.Properties
 import Prelude
 import Data.Maybe (Maybe(..), maybe)
 import Data.String (joinWith, toUpper)
-
-import Halogen.Svg.Core as Core
-
-import Halogen.HTML.Core (Prop, AttrName(AttrName), Namespace(Namespace))
+import Halogen.HTML.Core (AttrName(..), Namespace(Namespace), Prop)
 import Halogen.HTML.Properties (IProp, attrNS)
+import Halogen.Svg.Core as Core
 import Unsafe.Coerce (unsafeCoerce)
 
-data Color = RGB Int Int Int
-           | RGBA Int Int Int Number
+data Color
+  = RGB Int Int Int
+  | RGBA Int Int Int Number
 
 printColor :: Maybe Color -> String
 printColor = case _ of
-  Just (RGB r_ g_ b_) -> "rgb(" <> (joinWith "," $ map show [r_, g_, b_]) <> ")"
-  Just (RGBA r_ g_ b_ o) -> "rgba(" <> (joinWith "," $ map show [r_, g_, b_]) <> "," <> show o <> ")"
+  Just (RGB r_ g_ b_) -> "rgb(" <> (joinWith "," $ map show [ r_, g_, b_ ]) <> ")"
+  Just (RGBA r_ g_ b_ o) -> "rgba(" <> (joinWith "," $ map show [ r_, g_, b_ ]) <> "," <> show o <> ")"
   Nothing -> "None"
 
 data Transform
@@ -28,7 +27,10 @@ data Transform
   | SkewX Number
   | SkewY Number
 
-data TextAnchor = Start | AnchorMiddle | End
+data TextAnchor
+  = Start
+  | AnchorMiddle
+  | End
 
 data CSSLength
   = Cm Number
@@ -87,6 +89,7 @@ instance showOrient :: Show Orient where
 
 printOrient :: Orient -> String
 printOrient AutoOrient = "auto"
+
 printOrient AutoStartReverse = "auto-start-reverse"
 
 data MarkerUnit
@@ -122,8 +125,18 @@ printTextAnchor = case _ of
   End -> "end"
 
 data Baseline
-  = Auto | UseScript | NoChange | ResetSize | Ideographic | Alphabetic | Hanging
-  | Mathematical | Central | BaselineMiddle | TextAfterEdge | TextBeforeEdge
+  = Auto
+  | UseScript
+  | NoChange
+  | ResetSize
+  | Ideographic
+  | Alphabetic
+  | Hanging
+  | Mathematical
+  | Central
+  | BaselineMiddle
+  | TextAfterEdge
+  | TextBeforeEdge
 
 printBaseline :: Baseline -> String
 printBaseline = case _ of
@@ -142,28 +155,26 @@ printBaseline = case _ of
 
 printTransform :: Transform -> String
 printTransform = case _ of
-  Matrix a_ b_ c_ d_ e_ f_ ->
-    "matrix(" <> (joinWith "," $ map show [a_, b_, c_, d_, e_, f_]) <> ")"
-  Translate x_ y_ ->
-    "translate(" <> (joinWith "," $ map show [x_, y_]) <> ")"
-  Scale x_ y_ ->
-    "scale(" <> (joinWith "," $ map show [x_, y_]) <> ")"
-  Rotate a_ x_ y_ ->
-    "rotate(" <> (joinWith "," $ map show [a_, x_, y_]) <> ")"
-  SkewX a_ ->
-    "skewX(" <> show a_ <> ")"
-  SkewY a_ ->
-    "skewY(" <> show a_ <> ")"
+  Matrix a_ b_ c_ d_ e_ f_ -> "matrix(" <> (joinWith "," $ map show [ a_, b_, c_, d_, e_, f_ ]) <> ")"
+  Translate x_ y_ -> "translate(" <> (joinWith "," $ map show [ x_, y_ ]) <> ")"
+  Scale x_ y_ -> "scale(" <> (joinWith "," $ map show [ x_, y_ ]) <> ")"
+  Rotate a_ x_ y_ -> "rotate(" <> (joinWith "," $ map show [ a_, x_, y_ ]) <> ")"
+  SkewX a_ -> "skewX(" <> show a_ <> ")"
+  SkewY a_ -> "skewY(" <> show a_ <> ")"
 
-data D = Rel Command | Abs Command
+data D
+  = Rel Command
+  | Abs Command
 
 printD :: D -> String
 printD = case _ of
   Abs cmd -> do
-    let p = printCommand cmd
+    let
+      p = printCommand cmd
     (toUpper p.command) <> p.params
   Rel cmd -> do
-    let p = printCommand cmd
+    let
+      p = printCommand cmd
     p.command <> p.params
 
 data Command
@@ -176,31 +187,32 @@ data Command
   | A Number Number Number Boolean Boolean Number Number
   | Z
 
-printCommand :: Command -> {command :: String, params :: String}
+printCommand :: Command -> { command :: String, params :: String }
 printCommand = case _ of
-  M x_ y_ ->
-    {command: "m", params: joinWith "," $ map show [x_, y_]}
-  L x_ y_ ->
-    {command: "l", params: joinWith "," $ map show [x_, y_]}
-  C x1_ y1_ x2_ y2_ x_ y_ ->
-    {command: "c" , params: joinWith "," $ map show [x1_, y1_, x2_, y2_, x_, y_]}
-  S x2_ y2_ x_ y_ ->
-    {command: "s" , params: joinWith "," $ map show [x2_, y2_, x_, y_]}
-  Q x1_ y1_ x_ y_ ->
-    {command: "q" , params: joinWith "," $ map show [x1_, y1_, x_, y_]}
-  T x_ y_ ->
-    {command: "t", params: joinWith "," $ map show [x_, y_]}
+  M x_ y_ -> { command: "m", params: joinWith "," $ map show [ x_, y_ ] }
+  L x_ y_ -> { command: "l", params: joinWith "," $ map show [ x_, y_ ] }
+  C x1_ y1_ x2_ y2_ x_ y_ -> { command: "c", params: joinWith "," $ map show [ x1_, y1_, x2_, y2_, x_, y_ ] }
+  S x2_ y2_ x_ y_ -> { command: "s", params: joinWith "," $ map show [ x2_, y2_, x_, y_ ] }
+  Q x1_ y1_ x_ y_ -> { command: "q", params: joinWith "," $ map show [ x1_, y1_, x_, y_ ] }
+  T x_ y_ -> { command: "t", params: joinWith "," $ map show [ x_, y_ ] }
   A rx_ ry_ rot large sweep x_ y_ ->
-    {command: "a", params: joinWith ","
-                 $ map show [ rx_, ry_, rot ]
-                 <> [ large_flag, sweep_flag ]
-                 <> map show [ x_, y_ ]}
+    { command: "a"
+    , params:
+        joinWith ","
+          $ map show [ rx_, ry_, rot ]
+          <> [ large_flag, sweep_flag ]
+          <> map show [ x_, y_ ]
+    }
     where
     large_flag = if large then "0" else "1"
-    sweep_flag = if sweep then "0" else "1"
-  Z -> {command: "z", params: ""}
 
-data Align = Min | Mid | Max
+    sweep_flag = if sweep then "0" else "1"
+  Z -> { command: "z", params: "" }
+
+data Align
+  = Min
+  | Mid
+  | Max
 
 printAlign :: Align -> String
 printAlign = case _ of
@@ -208,7 +220,9 @@ printAlign = case _ of
   Mid -> "Mid"
   Max -> "Max"
 
-data MeetOrSlice = Meet | Slice
+data MeetOrSlice
+  = Meet
+  | Slice
 
 printMeetOrSlice :: MeetOrSlice -> String
 printMeetOrSlice = case _ of
@@ -218,126 +232,126 @@ printMeetOrSlice = case _ of
 attr :: forall r i. AttrName -> String -> IProp r i
 attr = coe Core.attr
   where
-    coe :: (AttrName -> String -> Prop i) -> AttrName -> String -> IProp r i
-    coe = unsafeCoerce
+  coe :: (AttrName -> String -> Prop i) -> AttrName -> String -> IProp r i
+  coe = unsafeCoerce
 
-cx :: forall r i. Number -> IProp (cx :: Number | r) i
+cx :: forall r i. Number -> IProp ( cx :: Number | r ) i
 cx = attr (AttrName "cx") <<< show
 
-cy :: forall r i. Number -> IProp (cy :: Number | r) i
+cy :: forall r i. Number -> IProp ( cy :: Number | r ) i
 cy = attr (AttrName "cy") <<< show
 
-r :: forall s i. Number -> IProp (r :: Number | s) i
+r :: forall s i. Number -> IProp ( r :: Number | s ) i
 r = attr (AttrName "r") <<< show
 
-viewBox :: forall r i. Number -> Number -> Number -> Number -> IProp (viewBox :: String | r) i
-viewBox x_ y_ w h = attr (AttrName "viewBox") (joinWith " " $ map show [x_, y_, w, h])
+viewBox :: forall r i. Number -> Number -> Number -> Number -> IProp ( viewBox :: String | r ) i
+viewBox x_ y_ w h = attr (AttrName "viewBox") (joinWith " " $ map show [ x_, y_, w, h ])
 
-preserveAspectRatio :: forall r i. Maybe {x_ :: Align, y_ :: Align} -> MeetOrSlice -> IProp (preserveAspectRatio :: String | r) i
-preserveAspectRatio align slice =
-  attr (AttrName "preserveAspectRatio") (joinWith " " $ [align_str, printMeetOrSlice slice])
+preserveAspectRatio :: forall r i. Maybe { x_ :: Align, y_ :: Align } -> MeetOrSlice -> IProp ( preserveAspectRatio :: String | r ) i
+preserveAspectRatio align slice = attr (AttrName "preserveAspectRatio") (joinWith " " $ [ align_str, printMeetOrSlice slice ])
   where
-    align_str = case align of
-      Nothing -> "none"
-      Just {x_, y_} -> joinWith "" $ ["x", printAlign x_, "Y", printAlign y_]
+  align_str = case align of
+    Nothing -> "none"
+    Just { x_, y_ } -> joinWith "" $ [ "x", printAlign x_, "Y", printAlign y_ ]
 
-rx :: forall r i. Number -> IProp (rx :: Number | r) i
+rx :: forall r i. Number -> IProp ( rx :: Number | r ) i
 rx = attr (AttrName "rx") <<< show
 
-ry :: forall r i. Number -> IProp (ry :: Number | r) i
+ry :: forall r i. Number -> IProp ( ry :: Number | r ) i
 ry = attr (AttrName "ry") <<< show
 
-width :: forall r i. Number -> IProp (width :: Number | r) i
+width :: forall r i. Number -> IProp ( width :: Number | r ) i
 width = attr (AttrName "width") <<< show
 
-height :: forall r i. Number -> IProp (height :: Number | r) i
+height :: forall r i. Number -> IProp ( height :: Number | r ) i
 height = attr (AttrName "height") <<< show
 
-x :: forall r i. Number -> IProp (x :: Number | r) i
+x :: forall r i. Number -> IProp ( x :: Number | r ) i
 x = attr (AttrName "x") <<< show
 
-y :: forall r i. Number -> IProp (y :: Number | r) i
+y :: forall r i. Number -> IProp ( y :: Number | r ) i
 y = attr (AttrName "y") <<< show
 
-x1 :: forall r i. Number -> IProp (x1 :: Number | r) i
+x1 :: forall r i. Number -> IProp ( x1 :: Number | r ) i
 x1 = attr (AttrName "x1") <<< show
 
-y1 :: forall r i. Number -> IProp (y1 :: Number | r) i
+y1 :: forall r i. Number -> IProp ( y1 :: Number | r ) i
 y1 = attr (AttrName "y1") <<< show
 
-x2 :: forall r i. Number -> IProp (x2 :: Number | r) i
+x2 :: forall r i. Number -> IProp ( x2 :: Number | r ) i
 x2 = attr (AttrName "x2") <<< show
 
-y2 :: forall r i. Number -> IProp (y2 :: Number | r) i
+y2 :: forall r i. Number -> IProp ( y2 :: Number | r ) i
 y2 = attr (AttrName "y2") <<< show
 
-stroke :: forall r i. Maybe Color -> IProp (stroke :: String | r) i
+stroke :: forall r i. Maybe Color -> IProp ( stroke :: String | r ) i
 stroke = attr (AttrName "stroke") <<< printColor
 
-fill :: forall r i. Maybe Color -> IProp (fill :: String | r) i
+fill :: forall r i. Maybe Color -> IProp ( fill :: String | r ) i
 fill = attr (AttrName "fill") <<< printColor
 
-transform :: forall r i . Array Transform -> IProp (transform :: String | r) i
+transform :: forall r i. Array Transform -> IProp ( transform :: String | r ) i
 transform = attr (AttrName "transform") <<< joinWith " " <<< map printTransform
 
-d :: forall r i . Array D -> IProp (d :: String | r) i
+d :: forall r i. Array D -> IProp ( d :: String | r ) i
 d = attr (AttrName "d") <<< joinWith " " <<< map printD
 
-text_anchor :: forall r i . TextAnchor -> IProp (text_anchor :: String | r) i
+text_anchor :: forall r i. TextAnchor -> IProp ( text_anchor :: String | r ) i
 text_anchor = attr (AttrName "text-anchor") <<< printTextAnchor
 
-font_size :: forall r i. FontSize -> IProp (font_size :: String | r) i
+font_size :: forall r i. FontSize -> IProp ( font_size :: String | r ) i
 font_size = attr (AttrName "font-size") <<< show
 
-dominant_baseline :: forall r i . Baseline -> IProp (transform :: String | r) i
+dominant_baseline :: forall r i. Baseline -> IProp ( transform :: String | r ) i
 dominant_baseline = attr (AttrName "dominant-baseline") <<< printBaseline
 
 -- TODO shouldn't this be 'classes' taking an (Array Classname), like the rest of Halogen?
-class_ :: forall r i . String -> IProp (class :: String | r) i
+class_ :: forall r i. String -> IProp ( class :: String | r ) i
 class_ = attr (AttrName "class")
 
-id :: forall r i . String -> IProp (id :: String | r) i
+id :: forall r i. String -> IProp ( id :: String | r ) i
 id = attr (AttrName "id")
 
-markerWidth :: forall r i. Number -> IProp (markerWidth :: Number | r) i
+markerWidth :: forall r i. Number -> IProp ( markerWidth :: Number | r ) i
 markerWidth = attr (AttrName "markerWidth") <<< show
 
-markerHeight :: forall r i. Number -> IProp (markerHeight :: Number | r) i
+markerHeight :: forall r i. Number -> IProp ( markerHeight :: Number | r ) i
 markerHeight = attr (AttrName "markerHeight") <<< show
 
-refX :: forall r i. Number -> IProp (refX :: Number | r) i
+refX :: forall r i. Number -> IProp ( refX :: Number | r ) i
 refX = attr (AttrName "refX") <<< show
 
-refY :: forall r i. Number -> IProp (refY :: Number | r) i
+refY :: forall r i. Number -> IProp ( refY :: Number | r ) i
 refY = attr (AttrName "refY") <<< show
 
-orient :: forall r i. Orient -> IProp (orient :: String | r) i
+orient :: forall r i. Orient -> IProp ( orient :: String | r ) i
 orient = attr (AttrName "orient") <<< printOrient
 
-markerUnits :: forall r i. MarkerUnit -> IProp (markerUnits :: String | r) i
+markerUnits :: forall r i. MarkerUnit -> IProp ( markerUnits :: String | r ) i
 markerUnits = attr (AttrName "markerUnits") <<< printMarkerUnit
 
-strokeWidth :: forall r i. Number -> IProp (strokeWidth :: Number | r) i
+strokeWidth :: forall r i. Number -> IProp ( strokeWidth :: Number | r ) i
 strokeWidth = attr (AttrName "stroke-width") <<< show
 
-markerEnd :: forall r i. String -> IProp (markerEnd :: String | r) i
+markerEnd :: forall r i. String -> IProp ( markerEnd :: String | r ) i
 markerEnd = attr (AttrName "marker-end")
 
 --------------------------------------------------------------------------------
-
 -- | https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/dur
-data DurationF a = Duration (Maybe a) (Maybe a) (Maybe a) (Maybe a) -- ^ TODO hours minutes seconds millis
+data DurationF a
+  = Duration (Maybe a) (Maybe a) (Maybe a) (Maybe a) -- ^ TODO hours minutes seconds millis
 
 derive instance functorDurationF :: Functor DurationF
 
 printDurationF :: forall a. Show a => DurationF a -> String
 printDurationF (Duration h m s i) = f "h" h <> f "m" m <> f "s" s <> f "i" i
-  where f u = maybe "" (\v -> show v <> u)
+  where
+  f u = maybe "" (\v -> show v <> u)
 
-type Duration = DurationF Number
+type Duration
+  = DurationF Number
 
 -- TODO derive Show instance for DurationF
-
 printDuration :: Duration -> String
 printDuration = printDurationF
 
@@ -345,45 +359,50 @@ printDuration = printDurationF
 seconds :: Number -> Duration
 seconds s = Duration Nothing Nothing (Just s) Nothing
 
-data FillState = Freeze | Remove
+data FillState
+  = Freeze
+  | Remove
 
 printFillState :: FillState -> String
 printFillState = case _ of
   Freeze -> "freeze"
   Remove -> "remove"
 
-dur :: forall r i. Duration -> IProp (dur :: String | r) i
+dur :: forall r i. Duration -> IProp ( dur :: String | r ) i
 dur = attr (AttrName "dur") <<< printDuration
 
 -- TODO ADT or free string?
-attributeName :: forall r i. String -> IProp (attributeName :: String | r) i
+attributeName :: forall r i. String -> IProp ( attributeName :: String | r ) i
 attributeName = attr (AttrName "attributeName")
 
 -- https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/from
-from :: forall r i. String -> IProp (from :: String | r) i
+from :: forall r i. String -> IProp ( from :: String | r ) i
 from = attr (AttrName "from")
 
 -- https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/to
-to :: forall r i. String -> IProp (to :: String | r) i
+to :: forall r i. String -> IProp ( to :: String | r ) i
 to = attr (AttrName "to")
 
 -- https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/begin
-begin :: forall r i. String -> IProp (begin :: String | r) i
+begin :: forall r i. String -> IProp ( begin :: String | r ) i
 begin = attr (AttrName "begin")
 
-repeatCount :: forall r i. Int -> IProp (repeatCount :: Int | r) i
+repeatCount :: forall r i. Int -> IProp ( repeatCount :: Int | r ) i
 repeatCount = attr (AttrName "repeatCount") <<< show
 
 -- TODO this is just 'fill', but that function is already specialised to Color in this module
-fillAnim :: forall r i. FillState -> IProp (fill :: String | r) i
+fillAnim :: forall r i. FillState -> IProp ( fill :: String | r ) i
 fillAnim = attr (AttrName "fill") <<< printFillState
 
+href :: forall r i. String -> IProp ( href :: String | r ) i
+href = attr (AttrName "href")
+
 -- TODO xlink:href seems to have some issues, among others around its namespace
-xlinkHref :: forall r i. String -> IProp (xlinkHref :: String | r) i
+xlinkHref :: forall r i. String -> IProp ( xlinkHref :: String | r ) i
 -- xlinkHref = attr (AttrName "xlink:href")
 -- xlinkHref = attrNS (Namespace "xlink") (AttrName "href")
 xlinkHref = attrNS (Namespace "xlink") (AttrName "xlink:href")
 
 -- TODO copied from `d`; adapt where needed
-path :: forall r i . Array D -> IProp (path :: String | r) i
+path :: forall r i. Array D -> IProp ( path :: String | r ) i
 path = attr (AttrName "path") <<< joinWith " " <<< map printD

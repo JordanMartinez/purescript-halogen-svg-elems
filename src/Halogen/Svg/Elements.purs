@@ -26,6 +26,9 @@ g = element $ ElemName "g"
 circle :: forall p i. Leaf I.SVGcircle p i
 circle props = element (ElemName "circle") props []
 
+image :: forall p i. Leaf I.SVGimage p i
+image props = element (ElemName "image") props []
+
 ellipse :: forall p i. Leaf I.SVGellipse p i
 ellipse props = element (ElemName "ellipse") props []
 
@@ -49,9 +52,6 @@ defs = element $ ElemName "defs"
 
 marker :: forall p i. Node I.SVGmarker p i
 marker = element $ ElemName "marker"
-
-image :: forall p i. Node I.SVGimage p i
-image = element $ ElemName "image"
 
 --------------------------------------------------------------------------------
 animate :: forall p i. Leaf I.SVGanimate p i
