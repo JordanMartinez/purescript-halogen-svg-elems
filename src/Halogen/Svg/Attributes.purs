@@ -303,7 +303,7 @@ v = renderCommand1Arg "v"
 
 c :: CommandPositionReference -> Number -> Number -> Number -> Number -> Number -> Number -> PathCommand
 c ref x1_ y1_ x2_ y2_ x_ y_ = PathCommand $ (renderCommand ref "c") <>
-    show x1_ <> ", " <> show y1_ <> ", " <> show x2_ <> ", " <> show y2_ <>
+    show x1_ <> ", " <> show y1_ <> ", " <> show x2_ <> ", " <> show y2_ <> ", " <>
     show x_ <> ", " <> show y_
 
 s :: CommandPositionReference -> Number -> Number -> Number -> Number -> PathCommand
@@ -317,8 +317,8 @@ t = renderCommand2Args "t"
 
 a :: CommandPositionReference -> Number -> Number -> Number -> CommandArcChoice -> CommandSweepChoice -> Number -> Number -> PathCommand
 a ref rx_ ry_ rot arc sweep x_ y_ = PathCommand $ (renderCommand ref "a") <>
-  show rx_ <> ", " <> show ry_ <> ", " <> show rot <>
-  (printCommandArcChoice arc) <> " " <> (printCommandSweepChoice sweep) <>
+  show rx_ <> ", " <> show ry_ <> ", " <> show rot <> " " <>
+  (printCommandArcChoice arc) <> " " <> (printCommandSweepChoice sweep) <> " " <>
   show x_ <> " " <> show y_
 
 z :: PathCommand

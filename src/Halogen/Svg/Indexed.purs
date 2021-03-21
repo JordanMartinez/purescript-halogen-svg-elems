@@ -78,6 +78,7 @@ type SVGg = GlobalAttributes
 type SVGpath = MarkerAttributes (GlobalAttributes
   ( d :: String
   , transform :: String
+  , strokeWidth :: Number
   ))
 
 type SVGline = MarkerAttributes (GlobalAttributes
