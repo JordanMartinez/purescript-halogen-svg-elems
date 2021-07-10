@@ -83,11 +83,13 @@ import Unsafe.Coerce (unsafeCoerce)
 
 data Color = RGB Int Int Int
            | RGBA Int Int Int Number
+           | Named String
 
 printColor :: Maybe Color -> String
 printColor = case _ of
   Just (RGB r_ g_ b_) -> "rgb(" <> (joinWith "," $ map show [r_, g_, b_]) <> ")"
   Just (RGBA r_ g_ b_ o) -> "rgba(" <> (joinWith "," $ map show [r_, g_, b_]) <> "," <> show o <> ")"
+  Just (Named str) -> str
   Nothing -> "None"
 
 data Transform

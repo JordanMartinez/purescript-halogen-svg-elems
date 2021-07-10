@@ -29,7 +29,12 @@ type GlobalEventAttributes r =
   | r)
 
 -- These can also be done with CSS
-type PresentationAttributes r = (stroke :: String, fill :: String | r)
+type PresentationAttributes r = 
+  ( stroke :: String
+  , strokeWidth :: Number
+  , fill :: String 
+  | r
+  )
 
 type MarkerAttributes r =
   ( markerStart :: String
@@ -86,7 +91,6 @@ type SVGline = MarkerAttributes (GlobalAttributes
   , x2 :: Number
   , y2 :: Number
   , transform :: String
-  , strokeWidth :: Number
   ))
 
 type SVGtext = GlobalAttributes
