@@ -7,6 +7,7 @@ module Halogen.Svg.Attributes
   , module Halogen.Svg.Attributes.FillState
   , module Halogen.Svg.Attributes.FontSize
   , module Halogen.Svg.Attributes.MarkerUnit
+  , module Halogen.Svg.Attributes.MeetOrSlice
   , Transform(..)
   , TextAnchor(..)
   , Orient(..)
@@ -21,8 +22,6 @@ module Halogen.Svg.Attributes
   , CommandSweepChoice(..)
   , printCommandSweepChoice
   , m, l, h, v, c, s, q, t, a, z
-  , MeetOrSlice(..)
-  , printMeetOrSlice
   , attr
   , cx, cy
   , r
@@ -93,6 +92,7 @@ import Halogen.Svg.Attributes.Duration ( Duration, printDuration
 import Halogen.Svg.Attributes.FillState (FillState(..), printFillState)
 import Halogen.Svg.Attributes.FontSize (FontSize(..))
 import Halogen.Svg.Attributes.MarkerUnit (MarkerUnit(..), printMarkerUnit)
+import Halogen.Svg.Attributes.MeetOrSlice (MeetOrSlice(..), printMeetOrSlice)
 import Halogen.Svg.Core as Core
 import Unsafe.Coerce (unsafeCoerce)
 
@@ -237,13 +237,6 @@ a ref rx_ ry_ rot arc sweep x_ y_ = PathCommand $ (renderCommand ref "a") <>
 
 z :: PathCommand
 z = PathCommand "z"
-
-data MeetOrSlice = Meet | Slice
-
-printMeetOrSlice :: MeetOrSlice -> String
-printMeetOrSlice = case _ of
-  Meet -> "meet"
-  Slice -> "slice"
 
 attr :: forall r i. AttrName -> String -> IProp r i
 attr = coe Core.attr
