@@ -3,6 +3,7 @@ module Halogen.Svg.Attributes
   , module Halogen.Svg.Attributes.Baseline
   , module Halogen.Svg.Attributes.Color
   , module Halogen.Svg.Attributes.CSSLength
+  , module Halogen.Svg.Attributes.Duration
   , Transform(..)
   , TextAnchor(..)
   , FontSize(..)
@@ -63,10 +64,6 @@ module Halogen.Svg.Attributes
   , markerStart
   , markerMid
   , markerEnd
-  , DurationF(..)
-  , printDurationF
-  , Duration
-  , printDuration
   , seconds
   , FillState(..)
   , printFillState
@@ -93,6 +90,8 @@ import Halogen.Svg.Attributes.Align (Align(..), printAlign)
 import Halogen.Svg.Attributes.Baseline (Baseline(..), printBaseline)
 import Halogen.Svg.Attributes.Color (Color(..), printColor)
 import Halogen.Svg.Attributes.CSSLength (CSSLength(..))
+import Halogen.Svg.Attributes.Duration ( Duration, printDuration
+                                       , DurationF (Duration), printDurationF )
 import Halogen.Svg.Core as Core
 import Unsafe.Coerce (unsafeCoerce)
 
@@ -443,25 +442,6 @@ markerMid = attr (AttrName "marker-mid")
 
 markerEnd :: forall r i. String -> IProp (markerEnd :: String | r) i
 markerEnd = attr (AttrName "marker-end")
-
-
---------------------------------------------------------------------------------
-
--- | https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/dur
-data DurationF a = Duration (Maybe a) (Maybe a) (Maybe a) (Maybe a) -- ^ TODO hours minutes seconds millis
-
-derive instance functorDurationF :: Functor DurationF
-
-printDurationF :: forall a. Show a => DurationF a -> String
-printDurationF (Duration h_ m_ s_ i) = f "h" h_ <> f "m" m_ <> f "s" s_ <> f "i" i
-  where f u = maybe "" (\val -> show val <> u)
-
-type Duration = DurationF Number
-
--- TODO derive Show instance for DurationF
-
-printDuration :: Duration -> String
-printDuration = printDurationF
 
 -- TODO add other constructors
 seconds :: Number -> Duration
