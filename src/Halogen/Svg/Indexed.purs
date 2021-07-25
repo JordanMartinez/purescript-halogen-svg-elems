@@ -1,4 +1,30 @@
-module Halogen.Svg.Indexed where
+module Halogen.Svg.Indexed
+  ( CoreAttributes
+  , GlobalEventAttributes
+  , GlobalAttributes
+  , StrokeAttributes
+  , StokeEndAttributes
+  , StrokeJoinAttributes
+  , FillAttributes
+  , MarkerAttributes
+  , FontAttributes
+  , AllPresentationAttributes
+  , SVGsvg
+  , SVGg
+  , SVGforeignObject
+  , SVGmarker
+  , SVGcircle
+  , SVGellipse
+  , SVGline
+  , SVGpath
+  , SVGrect
+  , SVGtext
+  , AnimationAttributes
+  , SVGanimate
+  , SVGanimateMotion
+  , SVGmpath
+  , SVGtitle
+  ) where
 
 import Type.Row (type (+))
 import Web.UIEvent.KeyboardEvent (KeyboardEvent)
@@ -199,9 +225,11 @@ type AnimationAttributes r = GlobalAttributes
   , begin :: String
   , dur :: String
   , repeatCount :: Int
-  , fill :: String -- ^ Unlike 'fill' in 'GlobalAttributes', this is intended to record a 'FillState' via 'fillAnim'.
+  , fill :: String
   | r
   )
+{- ^ Unlike `fill` in `GlobalAttributes`, `fill` in `AnimationAttributes` is
+     intended to record a `FillState` via `fillAnim`. -}
 
 type SVGanimate = AnimationAttributes (attributeName :: String)
 
