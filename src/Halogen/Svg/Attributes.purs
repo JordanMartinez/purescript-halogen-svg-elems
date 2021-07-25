@@ -5,9 +5,9 @@ module Halogen.Svg.Attributes
   , module Halogen.Svg.Attributes.CSSLength
   , module Halogen.Svg.Attributes.Duration
   , module Halogen.Svg.Attributes.FillState
+  , module Halogen.Svg.Attributes.FontSize
   , Transform(..)
   , TextAnchor(..)
-  , FontSize(..)
   , Orient(..)
   , printOrient
   , MarkerUnit(..)
@@ -92,6 +92,7 @@ import Halogen.Svg.Attributes.CSSLength (CSSLength(..))
 import Halogen.Svg.Attributes.Duration ( Duration, printDuration
                                        , DurationF (Duration), printDurationF )
 import Halogen.Svg.Attributes.FillState (FillState(..), printFillState)
+import Halogen.Svg.Attributes.FontSize (FontSize(..))
 import Halogen.Svg.Core as Core
 import Unsafe.Coerce (unsafeCoerce)
 
@@ -104,18 +105,6 @@ data Transform
   | SkewY Number
 
 data TextAnchor = Start | AnchorMiddle | End
-
-data FontSize
-  = XXSmall
-  | XSmall
-  | Small
-  | Medium
-  | Large
-  | XLarge
-  | XXLarge
-  | Smaller
-  | Larger
-  | FontSizeLength CSSLength
 
 data Orient
   = AutoOrient
@@ -141,19 +130,6 @@ printMarkerUnit :: MarkerUnit -> String
 printMarkerUnit = case _ of
   UserSpaceOnUse -> "userSpaceOnUse"
   StrokeWidth -> "strokeWidth"
-
-instance showFontSize :: Show FontSize where
-  show = case _ of
-    XXSmall -> "xx-small"
-    XSmall -> "x-small"
-    Small -> "small"
-    Medium -> "medium"
-    Large -> "large"
-    XLarge -> "x-large"
-    XXLarge -> "xx-large"
-    Smaller -> "smaller"
-    Larger -> "larger"
-    FontSizeLength l_ -> show l_
 
 printTextAnchor :: TextAnchor -> String
 printTextAnchor = case _ of
