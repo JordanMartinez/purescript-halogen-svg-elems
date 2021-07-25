@@ -1,5 +1,6 @@
 module Halogen.Svg.Attributes
-  ( Color(..)
+  ( module Halogen.Svg.Attributes.Align
+  , Color(..)
   , printColor
   , Transform(..)
   , TextAnchor(..)
@@ -21,8 +22,6 @@ module Halogen.Svg.Attributes
   , CommandSweepChoice(..)
   , printCommandSweepChoice
   , m, l, h, v, c, s, q, t, a, z
-  , Align(..)
-  , printAlign
   , MeetOrSlice(..)
   , printMeetOrSlice
   , attr
@@ -92,6 +91,7 @@ import Data.Newtype (un)
 import Data.String (joinWith, toUpper)
 import Halogen.HTML.Core (Prop, AttrName(AttrName), Namespace(Namespace), ClassName(..))
 import Halogen.HTML.Properties (IProp, attrNS)
+import Halogen.Svg.Attributes.Align (Align(..), printAlign)
 import Halogen.Svg.Core as Core
 import Unsafe.Coerce (unsafeCoerce)
 
@@ -339,14 +339,6 @@ a ref rx_ ry_ rot arc sweep x_ y_ = PathCommand $ (renderCommand ref "a") <>
 
 z :: PathCommand
 z = PathCommand "z"
-
-data Align = Min | Mid | Max
-
-printAlign :: Align -> String
-printAlign = case _ of
-  Min -> "Min"
-  Mid -> "Mid"
-  Max -> "Max"
 
 data MeetOrSlice = Meet | Slice
 
