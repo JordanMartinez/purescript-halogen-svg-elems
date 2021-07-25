@@ -1,8 +1,7 @@
 module Halogen.Svg.Attributes
   ( module Halogen.Svg.Attributes.Align
   , module Halogen.Svg.Attributes.Baseline
-  , Color(..)
-  , printColor
+  , module Halogen.Svg.Attributes.Color
   , Transform(..)
   , TextAnchor(..)
   , CSSLength(..)
@@ -92,19 +91,9 @@ import Halogen.HTML.Core (Prop, AttrName(AttrName), Namespace(Namespace), ClassN
 import Halogen.HTML.Properties (IProp, attrNS)
 import Halogen.Svg.Attributes.Align (Align(..), printAlign)
 import Halogen.Svg.Attributes.Baseline (Baseline(..), printBaseline)
+import Halogen.Svg.Attributes.Color (Color(..), printColor)
 import Halogen.Svg.Core as Core
 import Unsafe.Coerce (unsafeCoerce)
-
-data Color = RGB Int Int Int
-           | RGBA Int Int Int Number
-           | Named String
-
-printColor :: Maybe Color -> String
-printColor = case _ of
-  Just (RGB r_ g_ b_) -> "rgb(" <> (joinWith "," $ map show [r_, g_, b_]) <> ")"
-  Just (RGBA r_ g_ b_ o) -> "rgba(" <> (joinWith "," $ map show [r_, g_, b_]) <> "," <> show o <> ")"
-  Just (Named str) -> str
-  Nothing -> "None"
 
 data Transform
   = Matrix Number Number Number Number Number Number
