@@ -2,9 +2,9 @@ module Halogen.Svg.Attributes
   ( module Halogen.Svg.Attributes.Align
   , module Halogen.Svg.Attributes.Baseline
   , module Halogen.Svg.Attributes.Color
+  , module Halogen.Svg.Attributes.CSSLength
   , Transform(..)
   , TextAnchor(..)
-  , CSSLength(..)
   , FontSize(..)
   , Orient(..)
   , printOrient
@@ -92,6 +92,7 @@ import Halogen.HTML.Properties (IProp, attrNS)
 import Halogen.Svg.Attributes.Align (Align(..), printAlign)
 import Halogen.Svg.Attributes.Baseline (Baseline(..), printBaseline)
 import Halogen.Svg.Attributes.Color (Color(..), printColor)
+import Halogen.Svg.Attributes.CSSLength (CSSLength(..))
 import Halogen.Svg.Core as Core
 import Unsafe.Coerce (unsafeCoerce)
 
@@ -104,41 +105,6 @@ data Transform
   | SkewY Number
 
 data TextAnchor = Start | AnchorMiddle | End
-
-data CSSLength
-  = Cm Number
-  | Mm Number
-  | Inches Number
-  | Px Number
-  | Pt Number
-  | Pc Number
-  | Em Number
-  | Ex Number
-  | Rem Number
-  | Vw Number
-  | Vh Number
-  | Vmin Number
-  | Vmax Number
-  | Pct Number
-  | Nil
-
-instance showCSSLength :: Show CSSLength where
-  show = case _ of
-    Cm i -> (show i) <> "cm"
-    Mm i -> (show i) <> "mm"
-    Inches i -> (show i) <> "in"
-    Px i -> (show i) <> "px"
-    Pt i -> (show i) <> "pt"
-    Pc i -> (show i) <> "pc"
-    Em i -> (show i) <> "em"
-    Ex i -> (show i) <> "ex"
-    Rem i -> (show i) <> "rem"
-    Vw i -> (show i) <> "vw"
-    Vh i -> (show i) <> "vh"
-    Vmin i -> (show i) <> "vmin"
-    Vmax i -> (show i) <> "vmax"
-    Pct i -> (show i) <> "%"
-    Nil -> "0"
 
 data FontSize
   = XXSmall
