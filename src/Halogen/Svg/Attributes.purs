@@ -4,6 +4,7 @@ module Halogen.Svg.Attributes
   , module Halogen.Svg.Attributes.Color
   , module Halogen.Svg.Attributes.CSSLength
   , module Halogen.Svg.Attributes.Duration
+  , module Halogen.Svg.Attributes.FillState
   , Transform(..)
   , TextAnchor(..)
   , FontSize(..)
@@ -65,8 +66,6 @@ module Halogen.Svg.Attributes
   , markerMid
   , markerEnd
   , seconds
-  , FillState(..)
-  , printFillState
   , dur
   , attributeName
   , from, to
@@ -92,6 +91,7 @@ import Halogen.Svg.Attributes.Color (Color(..), printColor)
 import Halogen.Svg.Attributes.CSSLength (CSSLength(..))
 import Halogen.Svg.Attributes.Duration ( Duration, printDuration
                                        , DurationF (Duration), printDurationF )
+import Halogen.Svg.Attributes.FillState (FillState(..), printFillState)
 import Halogen.Svg.Core as Core
 import Unsafe.Coerce (unsafeCoerce)
 
@@ -446,13 +446,6 @@ markerEnd = attr (AttrName "marker-end")
 -- TODO add other constructors
 seconds :: Number -> Duration
 seconds s_ = Duration Nothing Nothing (Just s_) Nothing
-
-data FillState = Freeze | Remove
-
-printFillState :: FillState -> String
-printFillState = case _ of
-  Freeze -> "freeze"
-  Remove -> "remove"
 
 dur :: forall r i. Duration -> IProp (dur :: String | r) i
 dur = attr (AttrName "dur") <<< printDuration
