@@ -6,12 +6,11 @@ module Halogen.Svg.Attributes
   , module Halogen.Svg.Attributes.Duration
   , module Halogen.Svg.Attributes.FillState
   , module Halogen.Svg.Attributes.FontSize
+  , module Halogen.Svg.Attributes.MarkerUnit
   , Transform(..)
   , TextAnchor(..)
   , Orient(..)
   , printOrient
-  , MarkerUnit(..)
-  , printMarkerUnit
   , printTextAnchor
   , printTransform
   , PathCommand -- constructor not exported
@@ -93,6 +92,7 @@ import Halogen.Svg.Attributes.Duration ( Duration, printDuration
                                        , DurationF (Duration), printDurationF )
 import Halogen.Svg.Attributes.FillState (FillState(..), printFillState)
 import Halogen.Svg.Attributes.FontSize (FontSize(..))
+import Halogen.Svg.Attributes.MarkerUnit (MarkerUnit(..), printMarkerUnit)
 import Halogen.Svg.Core as Core
 import Unsafe.Coerce (unsafeCoerce)
 
@@ -117,19 +117,6 @@ instance showOrient :: Show Orient where
 printOrient :: Orient -> String
 printOrient AutoOrient = "auto"
 printOrient AutoStartReverse = "auto-start-reverse"
-
-data MarkerUnit
-  = UserSpaceOnUse
-  | StrokeWidth
-
-instance showMarkerUnit :: Show MarkerUnit where
-  show UserSpaceOnUse = "userSpaceOnUse"
-  show StrokeWidth = "strokeWidth"
-
-printMarkerUnit :: MarkerUnit -> String
-printMarkerUnit = case _ of
-  UserSpaceOnUse -> "userSpaceOnUse"
-  StrokeWidth -> "strokeWidth"
 
 printTextAnchor :: TextAnchor -> String
 printTextAnchor = case _ of
