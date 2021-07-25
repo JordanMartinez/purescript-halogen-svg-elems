@@ -1,5 +1,6 @@
 module Halogen.Svg.Attributes
   ( module Halogen.Svg.Attributes.Align
+  , module Halogen.Svg.Attributes.Baseline
   , Color(..)
   , printColor
   , Transform(..)
@@ -11,8 +12,6 @@ module Halogen.Svg.Attributes
   , MarkerUnit(..)
   , printMarkerUnit
   , printTextAnchor
-  , Baseline(..)
-  , printBaseline
   , printTransform
   , PathCommand -- constructor not exported
   , printPathCommand
@@ -92,6 +91,7 @@ import Data.String (joinWith, toUpper)
 import Halogen.HTML.Core (Prop, AttrName(AttrName), Namespace(Namespace), ClassName(..))
 import Halogen.HTML.Properties (IProp, attrNS)
 import Halogen.Svg.Attributes.Align (Align(..), printAlign)
+import Halogen.Svg.Attributes.Baseline (Baseline(..), printBaseline)
 import Halogen.Svg.Core as Core
 import Unsafe.Coerce (unsafeCoerce)
 
@@ -206,25 +206,6 @@ printTextAnchor = case _ of
   Start -> "start"
   AnchorMiddle -> "middle"
   End -> "end"
-
-data Baseline
-  = Auto | UseScript | NoChange | ResetSize | Ideographic | Alphabetic | Hanging
-  | Mathematical | Central | BaselineMiddle | TextAfterEdge | TextBeforeEdge
-
-printBaseline :: Baseline -> String
-printBaseline = case _ of
-  Auto -> "auto"
-  UseScript -> "use-script"
-  NoChange -> "no-change"
-  ResetSize -> "reset-size"
-  Ideographic -> "ideographic"
-  Alphabetic -> "alphabetic"
-  Hanging -> "hanging"
-  Mathematical -> "mathematical"
-  Central -> "central"
-  BaselineMiddle -> "middle"
-  TextAfterEdge -> "text-after-edge"
-  TextBeforeEdge -> "text-before-edge"
 
 printTransform :: Transform -> String
 printTransform = case _ of
