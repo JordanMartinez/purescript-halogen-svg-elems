@@ -8,10 +8,9 @@ module Halogen.Svg.Attributes
   , module Halogen.Svg.Attributes.FontSize
   , module Halogen.Svg.Attributes.MarkerUnit
   , module Halogen.Svg.Attributes.MeetOrSlice
+  , module Halogen.Svg.Attributes.Orient
   , Transform(..)
   , TextAnchor(..)
-  , Orient(..)
-  , printOrient
   , printTextAnchor
   , printTransform
   , PathCommand -- constructor not exported
@@ -93,6 +92,7 @@ import Halogen.Svg.Attributes.FillState (FillState(..), printFillState)
 import Halogen.Svg.Attributes.FontSize (FontSize(..))
 import Halogen.Svg.Attributes.MarkerUnit (MarkerUnit(..), printMarkerUnit)
 import Halogen.Svg.Attributes.MeetOrSlice (MeetOrSlice(..), printMeetOrSlice)
+import Halogen.Svg.Attributes.Orient (Orient(..), printOrient)
 import Halogen.Svg.Core as Core
 import Unsafe.Coerce (unsafeCoerce)
 
@@ -105,18 +105,6 @@ data Transform
   | SkewY Number
 
 data TextAnchor = Start | AnchorMiddle | End
-
-data Orient
-  = AutoOrient
-  | AutoStartReverse
-
-instance showOrient :: Show Orient where
-  show AutoOrient = "auto"
-  show AutoStartReverse = "auto-start-reverse"
-
-printOrient :: Orient -> String
-printOrient AutoOrient = "auto"
-printOrient AutoStartReverse = "auto-start-reverse"
 
 printTextAnchor :: TextAnchor -> String
 printTextAnchor = case _ of
