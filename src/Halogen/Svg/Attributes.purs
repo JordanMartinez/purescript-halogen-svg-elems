@@ -10,9 +10,8 @@ module Halogen.Svg.Attributes
   , module Halogen.Svg.Attributes.MeetOrSlice
   , module Halogen.Svg.Attributes.Orient
   , module Halogen.Svg.Attributes.Path
+  , module Halogen.Svg.Attributes.TextAnchor
   , Transform(..)
-  , TextAnchor(..)
-  , printTextAnchor
   , printTransform
   , attr
   , cx, cy
@@ -86,6 +85,7 @@ import Halogen.Svg.Attributes.FontSize (FontSize(..))
 import Halogen.Svg.Attributes.MarkerUnit (MarkerUnit(..), printMarkerUnit)
 import Halogen.Svg.Attributes.MeetOrSlice (MeetOrSlice(..), printMeetOrSlice)
 import Halogen.Svg.Attributes.Orient (Orient(..), printOrient)
+import Halogen.Svg.Attributes.TextAnchor (TextAnchor(..), printTextAnchor)
 import Halogen.Svg.Core as Core
 import Unsafe.Coerce (unsafeCoerce)
 import Halogen.Svg.Attributes.Path (
@@ -103,14 +103,6 @@ data Transform
   | Rotate Number Number Number
   | SkewX Number
   | SkewY Number
-
-data TextAnchor = Start | AnchorMiddle | End
-
-printTextAnchor :: TextAnchor -> String
-printTextAnchor = case _ of
-  Start -> "start"
-  AnchorMiddle -> "middle"
-  End -> "end"
 
 printTransform :: Transform -> String
 printTransform = case _ of
