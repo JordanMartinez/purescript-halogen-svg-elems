@@ -1,5 +1,5 @@
 module Halogen.Svg.Attributes.Transform
-  ( Transform(Matrix, Translate, Scale, Rotate, SkewX, SkewY)
+  ( Transform(..)
   , printTransform
   ) where
 

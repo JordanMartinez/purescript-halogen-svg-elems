@@ -1,5 +1,5 @@
 module Halogen.Svg.Attributes.MarkerUnit
-  ( MarkerUnit(UserSpaceOnUse, StrokeWidth)
+  ( MarkerUnit(..)
   , printMarkerUnit
   ) where
 

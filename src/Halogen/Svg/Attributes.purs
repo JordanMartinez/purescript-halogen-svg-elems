@@ -75,7 +75,7 @@ import Halogen.Svg.Attributes.Baseline (Baseline(..), printBaseline)
 import Halogen.Svg.Attributes.Color (Color(..), printColor)
 import Halogen.Svg.Attributes.CSSLength (CSSLength(..))
 import Halogen.Svg.Attributes.Duration ( Duration, printDuration
-                                       , DurationF (Duration), printDurationF )
+                                       , DurationF(..), printDurationF )
 import Halogen.Svg.Attributes.FillState (FillState(..), printFillState)
 import Halogen.Svg.Attributes.FontSize (FontSize(..))
 import Halogen.Svg.Attributes.MarkerUnit (MarkerUnit(..), printMarkerUnit)

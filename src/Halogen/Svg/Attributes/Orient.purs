@@ -1,5 +1,5 @@
 module Halogen.Svg.Attributes.Orient
-  ( Orient(AutoOrient, AutoStartReverse)
+  ( Orient(..)
   , printOrient
   ) where
 

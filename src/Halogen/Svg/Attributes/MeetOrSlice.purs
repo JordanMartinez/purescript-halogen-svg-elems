@@ -1,5 +1,5 @@
 module Halogen.Svg.Attributes.MeetOrSlice
-  ( MeetOrSlice (Meet, Slice)
+  ( MeetOrSlice(..)
   , printMeetOrSlice
   ) where
 

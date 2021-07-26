@@ -1,5 +1,5 @@
 module Halogen.Svg.Attributes.TextAnchor
-  ( TextAnchor(Start, AnchorMiddle, End)
+  ( TextAnchor(..)
   , printTextAnchor
   ) where
 

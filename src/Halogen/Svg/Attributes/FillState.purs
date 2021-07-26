@@ -1,5 +1,5 @@
 module Halogen.Svg.Attributes.FillState
-  ( FillState(Freeze, Remove)
+  ( FillState(..)
   , printFillState
   ) where
 

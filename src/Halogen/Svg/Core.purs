@@ -6,7 +6,7 @@ module Halogen.Svg.Core
 -- Like Halogen.HTML.Core
 
 import Prelude
-import Data.Maybe (Maybe(Just, Nothing))
+import Data.Maybe (Maybe(..))
 import Halogen.HTML.Core as H
 import Halogen.VDom (ElemName, VDom(Elem))
 import Unsafe.Coerce (unsafeCoerce)

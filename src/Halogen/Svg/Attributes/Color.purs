@@ -1,10 +1,10 @@
 module Halogen.Svg.Attributes.Color
-  ( Color(RGB, RGBA, Named)
+  ( Color(..)
   , printColor
   ) where
 
 import Prelude
-import Data.Maybe (Maybe(Just, Nothing))
+import Data.Maybe (Maybe(..))
 import Halogen.Svg.Attributes.Utils (printArray)
 
 data Color = RGB Int Int Int

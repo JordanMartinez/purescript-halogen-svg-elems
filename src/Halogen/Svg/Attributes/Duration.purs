@@ -1,7 +1,7 @@
 module Halogen.Svg.Attributes.Duration
   ( Duration
   , printDuration
-  , DurationF (Duration)
+  , DurationF(..)
   , printDurationF
   ) where
 -- TODO: DurationF and printDurationF probably shouldn't be exported but

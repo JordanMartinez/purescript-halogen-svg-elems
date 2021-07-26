@@ -1,5 +1,5 @@
 module Halogen.Svg.Attributes.Align
-  ( Align(Min, Mid, Max)
+  ( Align(..)
   , printAlign
   ) where
 

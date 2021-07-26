@@ -1,8 +1,8 @@
 module Halogen.Svg.Attributes.Path
   ( PathCommand -- Constructor not exported. Use m, l, h, v, c, s, q, t, a, or z
-  , CommandPositionReference(Abs, Rel)
-  , CommandArcChoice(Arc0, Arc1)
-  , CommandSweepChoice(Sweep0, Sweep1)
+  , CommandPositionReference(..)
+  , CommandArcChoice(..)
+  , CommandSweepChoice(..)
   , m, l, h, v, c, s, q, t, a, z
   ) where
 
