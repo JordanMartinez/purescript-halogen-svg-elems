@@ -13,27 +13,17 @@ module Halogen.Svg.Attributes
   , module Halogen.Svg.Attributes.TextAnchor
   , module Halogen.Svg.Attributes.Transform
   , attr
+  , attributeName
+  , begin
+  , class_
+  , classes
   , cx, cy
-  , r
-  , viewBox
-  , preserveAspectRatio
-  , rx, ry
-  , width, height
-  , x, y
-  , x1, y1
-  , x2, y2
-  , stroke
-  , stroke_dasharray
-  , stroke_dashoffset
-  , stroke_linecap
-  , stroke_linejoin
-  , stroke_miterlimit
-  , stroke_opacity
-  , fill
-  , fillOpacity
-  , transform
   , d
-  , text_anchor
+  , dominant_baseline
+  , dur
+  , fill
+  , fillAnim
+  , fillOpacity
   , font_family
   , font_size
   , font_size_adjust
@@ -41,27 +31,35 @@ module Halogen.Svg.Attributes
   , font_style
   , font_variant
   , font_weight
-  , dominant_baseline
-  , class_
-  , classes
-  , id
-  , markerWidth, markerHeight
-  , refX, refY
-  , orient
-  , markerUnits
-  , strokeWidth
-  , markerStart
-  , markerMid
-  , markerEnd
-  , seconds
-  , dur
-  , attributeName
   , from, to
-  , begin
-  , repeatCount
-  , fillAnim
-  , xlinkHref
+  , id
+  , markerStart, markerMid, markerEnd
+  , markerUnits
+  , markerWidth, markerHeight
+  , orient
   , path
+  , preserveAspectRatio
+  , r
+  , refX, refY
+  , repeatCount
+  , rx, ry
+  , seconds
+  , stroke
+  , stroke_dasharray
+  , stroke_dashoffset
+  , stroke_linecap
+  , stroke_linejoin
+  , stroke_miterlimit
+  , stroke_opacity
+  , strokeWidth
+  , text_anchor
+  , transform
+  , viewBox
+  , width, height
+  , x, y
+  , x1, y1
+  , x2, y2
+  , xlinkHref
   )
   where
 -- Like Halogen.HTML.Properties
