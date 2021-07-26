@@ -100,17 +100,110 @@ attr = coe Core.attr
     coe :: (AttrName -> String -> Prop i) -> AttrName -> String -> IProp r i
     coe = unsafeCoerce
 
+-- TODO ADT or free string?
+attributeName :: forall r i. String -> IProp (attributeName :: String | r) i
+attributeName = attr (AttrName "attributeName")
+
+-- https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/begin
+begin :: forall r i. String -> IProp (begin :: String | r) i
+begin = attr (AttrName "begin")
+
+class_ :: forall r i . ClassName -> IProp (class :: String | r) i
+class_ = attr (AttrName "class") <<< un ClassName
+
+classes :: forall r i . Array ClassName -> IProp (class :: String | r) i
+classes = attr (AttrName "class") <<< joinWith " " <<< unwrapNewtype
+  where
+    unwrapNewtype :: Array ClassName -> Array String
+    unwrapNewtype = unsafeCoerce
+
 cx :: forall r i. Number -> IProp (cx :: Number | r) i
 cx = attr (AttrName "cx") <<< show
 
 cy :: forall r i. Number -> IProp (cy :: Number | r) i
 cy = attr (AttrName "cy") <<< show
 
-r :: forall s i. Number -> IProp (r :: Number | s) i
-r = attr (AttrName "r") <<< show
+d :: forall r i . Array PathCommand -> IProp (d :: String | r) i
+d = attr (AttrName "d") <<< joinWith " " <<< unwrapNewtype
+  where
+    unwrapNewtype :: Array PathCommand -> Array String
+    unwrapNewtype = unsafeCoerce
 
-viewBox :: forall r i. Number -> Number -> Number -> Number -> IProp (viewBox :: String | r) i
-viewBox x_ y_ w h_ = attr (AttrName "viewBox") (joinWith " " $ map show [x_, y_, w, h_])
+dominant_baseline :: forall r i . Baseline -> IProp (transform :: String | r) i
+dominant_baseline = attr (AttrName "dominant-baseline") <<< printBaseline
+
+dur :: forall r i. Duration -> IProp (dur :: String | r) i
+dur = attr (AttrName "dur") <<< printDuration
+
+fill :: forall r i. Maybe Color -> IProp (fill :: String | r) i
+fill = attr (AttrName "fill") <<< printColor
+
+-- TODO this is just 'fill', but that function is already specialised to Color in this module
+fillAnim :: forall r i. FillState -> IProp (fill :: String | r) i
+fillAnim = attr (AttrName "fill") <<< printFillState
+
+fillOpacity :: forall r i. Number -> IProp (fillOpacity :: Number | r) i
+fillOpacity = attr (AttrName "fill-opacity") <<< show
+
+font_family :: forall r i. String -> IProp (font_family :: String | r) i
+font_family = attr (AttrName "font-family")
+
+font_size :: forall r i. FontSize -> IProp (font_size :: String | r) i
+font_size = attr (AttrName "font-size") <<< show
+
+font_size_adjust :: forall r i. Number -> IProp (font_size_adjust :: String | r) i
+font_size_adjust = attr (AttrName "font-size-adjust") <<< show
+
+font_stretch :: forall r i. String -> IProp (font_stretch :: String | r) i
+font_stretch = attr (AttrName "font-stretch")
+
+font_style :: forall r i. String -> IProp (font_style :: String | r) i
+font_style = attr (AttrName "font-style")
+
+font_variant :: forall r i. String -> IProp (font_variant :: String | r) i
+font_variant = attr (AttrName "font-variant")
+
+font_weight :: forall r i. String -> IProp (font_weight :: String | r) i
+font_weight = attr (AttrName "font-weight")
+
+-- https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/from
+from :: forall r i. String -> IProp (from :: String | r) i
+from = attr (AttrName "from")
+
+-- https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/to
+to :: forall r i. String -> IProp (to :: String | r) i
+to = attr (AttrName "to")
+
+id :: forall r i . String -> IProp (id :: String | r) i
+id = attr (AttrName "id")
+
+markerStart :: forall r i. String -> IProp (markerStart :: String | r) i
+markerStart = attr (AttrName "marker-start")
+
+markerMid :: forall r i. String -> IProp (markerMid :: String | r) i
+markerMid = attr (AttrName "marker-mid")
+
+markerEnd :: forall r i. String -> IProp (markerEnd :: String | r) i
+markerEnd = attr (AttrName "marker-end")
+
+markerUnits :: forall r i. MarkerUnit -> IProp (markerUnits :: String | r) i
+markerUnits = attr (AttrName "markerUnits") <<< printMarkerUnit
+
+markerWidth :: forall r i. Number -> IProp (markerWidth :: Number | r) i
+markerWidth = attr (AttrName "markerWidth") <<< show
+
+markerHeight :: forall r i. Number -> IProp (markerHeight :: Number | r) i
+markerHeight = attr (AttrName "markerHeight") <<< show
+
+orient :: forall r i. Orient -> IProp (orient :: String | r) i
+orient = attr (AttrName "orient") <<< printOrient
+
+-- TODO copied from `d`; adapt where needed
+path :: forall r i . Array PathCommand -> IProp (path :: String | r) i
+path = attr (AttrName "path") <<< joinWith " " <<< unwrapNewtype
+  where
+    unwrapNewtype :: Array PathCommand -> Array String
+    unwrapNewtype = unsafeCoerce
 
 preserveAspectRatio :: forall r i. Maybe {x_ :: Align, y_ :: Align} -> MeetOrSlice -> IProp (preserveAspectRatio :: String | r) i
 preserveAspectRatio align slice =
@@ -120,35 +213,27 @@ preserveAspectRatio align slice =
       Nothing -> "none"
       Just {x_, y_} -> joinWith "" $ ["x", printAlign x_, "Y", printAlign y_]
 
+r :: forall s i. Number -> IProp (r :: Number | s) i
+r = attr (AttrName "r") <<< show
+
+refX :: forall r i. Number -> IProp (refX :: Number | r) i
+refX = attr (AttrName "refX") <<< show
+
+refY :: forall r i. Number -> IProp (refY :: Number | r) i
+refY = attr (AttrName "refY") <<< show
+
+repeatCount :: forall r i. Int -> IProp (repeatCount :: Int | r) i
+repeatCount = attr (AttrName "repeatCount") <<< show
+
 rx :: forall r i. Number -> IProp (rx :: Number | r) i
 rx = attr (AttrName "rx") <<< show
 
 ry :: forall r i. Number -> IProp (ry :: Number | r) i
 ry = attr (AttrName "ry") <<< show
 
-width :: forall r i. Number -> IProp (width :: Number | r) i
-width = attr (AttrName "width") <<< show
-
-height :: forall r i. Number -> IProp (height :: Number | r) i
-height = attr (AttrName "height") <<< show
-
-x :: forall r i. Number -> IProp (x :: Number | r) i
-x = attr (AttrName "x") <<< show
-
-y :: forall r i. Number -> IProp (y :: Number | r) i
-y = attr (AttrName "y") <<< show
-
-x1 :: forall r i. Number -> IProp (x1 :: Number | r) i
-x1 = attr (AttrName "x1") <<< show
-
-y1 :: forall r i. Number -> IProp (y1 :: Number | r) i
-y1 = attr (AttrName "y1") <<< show
-
-x2 :: forall r i. Number -> IProp (x2 :: Number | r) i
-x2 = attr (AttrName "x2") <<< show
-
-y2 :: forall r i. Number -> IProp (y2 :: Number | r) i
-y2 = attr (AttrName "y2") <<< show
+-- TODO add other constructors
+seconds :: Number -> Duration
+seconds s_ = Duration Nothing Nothing (Just s_) Nothing
 
 stroke :: forall r i. Maybe Color -> IProp (stroke :: String | r) i
 stroke = attr (AttrName "stroke") <<< printColor
@@ -174,126 +259,41 @@ stroke_opacity = attr (AttrName "stroke-opacity") <<< show
 strokeWidth :: forall r i. Number -> IProp (strokeWidth :: Number | r) i
 strokeWidth = attr (AttrName "stroke-width") <<< show
 
-fill :: forall r i. Maybe Color -> IProp (fill :: String | r) i
-fill = attr (AttrName "fill") <<< printColor
-
-fillOpacity :: forall r i. Number -> IProp (fillOpacity :: Number | r) i
-fillOpacity = attr (AttrName "fill-opacity") <<< show
+text_anchor :: forall r i . TextAnchor -> IProp (text_anchor :: String | r) i
+text_anchor = attr (AttrName "text-anchor") <<< printTextAnchor
 
 transform :: forall r i . Array Transform -> IProp (transform :: String | r) i
 transform = attr (AttrName "transform") <<< joinWith " " <<< map printTransform
 
-d :: forall r i . Array PathCommand -> IProp (d :: String | r) i
-d = attr (AttrName "d") <<< joinWith " " <<< unwrapNewtype
-  where
-    unwrapNewtype :: Array PathCommand -> Array String
-    unwrapNewtype = unsafeCoerce
+viewBox :: forall r i. Number -> Number -> Number -> Number -> IProp (viewBox :: String | r) i
+viewBox x_ y_ w h_ = attr (AttrName "viewBox") (joinWith " " $ map show [x_, y_, w, h_])
 
-text_anchor :: forall r i . TextAnchor -> IProp (text_anchor :: String | r) i
-text_anchor = attr (AttrName "text-anchor") <<< printTextAnchor
+width :: forall r i. Number -> IProp (width :: Number | r) i
+width = attr (AttrName "width") <<< show
 
-font_family :: forall r i. String -> IProp (font_family :: String | r) i
-font_family = attr (AttrName "font-family")
+height :: forall r i. Number -> IProp (height :: Number | r) i
+height = attr (AttrName "height") <<< show
 
-font_size :: forall r i. FontSize -> IProp (font_size :: String | r) i
-font_size = attr (AttrName "font-size") <<< show
+x :: forall r i. Number -> IProp (x :: Number | r) i
+x = attr (AttrName "x") <<< show
 
-font_size_adjust :: forall r i. Number -> IProp (font_size_adjust :: String | r) i
-font_size_adjust = attr (AttrName "font-size-adjust") <<< show
+y :: forall r i. Number -> IProp (y :: Number | r) i
+y = attr (AttrName "y") <<< show
 
-font_stretch :: forall r i. String -> IProp (font_stretch :: String | r) i
-font_stretch = attr (AttrName "font-stretch")
+x1 :: forall r i. Number -> IProp (x1 :: Number | r) i
+x1 = attr (AttrName "x1") <<< show
 
-font_style :: forall r i. String -> IProp (font_style :: String | r) i
-font_style = attr (AttrName "font-style")
+y1 :: forall r i. Number -> IProp (y1 :: Number | r) i
+y1 = attr (AttrName "y1") <<< show
 
-font_variant :: forall r i. String -> IProp (font_variant :: String | r) i
-font_variant = attr (AttrName "font-variant")
+x2 :: forall r i. Number -> IProp (x2 :: Number | r) i
+x2 = attr (AttrName "x2") <<< show
 
-font_weight :: forall r i. String -> IProp (font_weight :: String | r) i
-font_weight = attr (AttrName "font-weight")
-
-dominant_baseline :: forall r i . Baseline -> IProp (transform :: String | r) i
-dominant_baseline = attr (AttrName "dominant-baseline") <<< printBaseline
-
-class_ :: forall r i . ClassName -> IProp (class :: String | r) i
-class_ = attr (AttrName "class") <<< un ClassName
-
-classes :: forall r i . Array ClassName -> IProp (class :: String | r) i
-classes = attr (AttrName "class") <<< joinWith " " <<< unwrapNewtype
-  where
-    unwrapNewtype :: Array ClassName -> Array String
-    unwrapNewtype = unsafeCoerce
-
-id :: forall r i . String -> IProp (id :: String | r) i
-id = attr (AttrName "id")
-
-markerWidth :: forall r i. Number -> IProp (markerWidth :: Number | r) i
-markerWidth = attr (AttrName "markerWidth") <<< show
-
-markerHeight :: forall r i. Number -> IProp (markerHeight :: Number | r) i
-markerHeight = attr (AttrName "markerHeight") <<< show
-
-refX :: forall r i. Number -> IProp (refX :: Number | r) i
-refX = attr (AttrName "refX") <<< show
-
-refY :: forall r i. Number -> IProp (refY :: Number | r) i
-refY = attr (AttrName "refY") <<< show
-
-orient :: forall r i. Orient -> IProp (orient :: String | r) i
-orient = attr (AttrName "orient") <<< printOrient
-
-markerUnits :: forall r i. MarkerUnit -> IProp (markerUnits :: String | r) i
-markerUnits = attr (AttrName "markerUnits") <<< printMarkerUnit
-
-markerStart :: forall r i. String -> IProp (markerStart :: String | r) i
-markerStart = attr (AttrName "marker-start")
-
-markerMid :: forall r i. String -> IProp (markerMid :: String | r) i
-markerMid = attr (AttrName "marker-mid")
-
-markerEnd :: forall r i. String -> IProp (markerEnd :: String | r) i
-markerEnd = attr (AttrName "marker-end")
-
--- TODO add other constructors
-seconds :: Number -> Duration
-seconds s_ = Duration Nothing Nothing (Just s_) Nothing
-
-dur :: forall r i. Duration -> IProp (dur :: String | r) i
-dur = attr (AttrName "dur") <<< printDuration
-
--- TODO ADT or free string?
-attributeName :: forall r i. String -> IProp (attributeName :: String | r) i
-attributeName = attr (AttrName "attributeName")
-
--- https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/from
-from :: forall r i. String -> IProp (from :: String | r) i
-from = attr (AttrName "from")
-
--- https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/to
-to :: forall r i. String -> IProp (to :: String | r) i
-to = attr (AttrName "to")
-
--- https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/begin
-begin :: forall r i. String -> IProp (begin :: String | r) i
-begin = attr (AttrName "begin")
-
-repeatCount :: forall r i. Int -> IProp (repeatCount :: Int | r) i
-repeatCount = attr (AttrName "repeatCount") <<< show
-
--- TODO this is just 'fill', but that function is already specialised to Color in this module
-fillAnim :: forall r i. FillState -> IProp (fill :: String | r) i
-fillAnim = attr (AttrName "fill") <<< printFillState
+y2 :: forall r i. Number -> IProp (y2 :: Number | r) i
+y2 = attr (AttrName "y2") <<< show
 
 -- TODO xlink:href seems to have some issues, among others around its namespace
 xlinkHref :: forall r i. String -> IProp (xlinkHref :: String | r) i
 -- xlinkHref = attr (AttrName "xlink:href")
 -- xlinkHref = attrNS (Namespace "xlink") (AttrName "href")
 xlinkHref = attrNS (Namespace "xlink") (AttrName "xlink:href")
-
--- TODO copied from `d`; adapt where needed
-path :: forall r i . Array PathCommand -> IProp (path :: String | r) i
-path = attr (AttrName "path") <<< joinWith " " <<< unwrapNewtype
-  where
-    unwrapNewtype :: Array PathCommand -> Array String
-    unwrapNewtype = unsafeCoerce
