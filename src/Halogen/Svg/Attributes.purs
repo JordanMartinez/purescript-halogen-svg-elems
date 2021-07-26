@@ -11,8 +11,7 @@ module Halogen.Svg.Attributes
   , module Halogen.Svg.Attributes.Orient
   , module Halogen.Svg.Attributes.Path
   , module Halogen.Svg.Attributes.TextAnchor
-  , Transform(..)
-  , printTransform
+  , module Halogen.Svg.Attributes.Transform
   , attr
   , cx, cy
   , r
@@ -86,6 +85,7 @@ import Halogen.Svg.Attributes.MarkerUnit (MarkerUnit(..), printMarkerUnit)
 import Halogen.Svg.Attributes.MeetOrSlice (MeetOrSlice(..), printMeetOrSlice)
 import Halogen.Svg.Attributes.Orient (Orient(..), printOrient)
 import Halogen.Svg.Attributes.TextAnchor (TextAnchor(..), printTextAnchor)
+import Halogen.Svg.Attributes.Transform (Transform(..), printTransform)
 import Halogen.Svg.Core as Core
 import Unsafe.Coerce (unsafeCoerce)
 import Halogen.Svg.Attributes.Path (
@@ -96,28 +96,6 @@ import Halogen.Svg.Attributes.Path (
   m, l, h, v, c, s, q, t, a, z
   )
 
-data Transform
-  = Matrix Number Number Number Number Number Number
-  | Translate Number Number
-  | Scale Number Number
-  | Rotate Number Number Number
-  | SkewX Number
-  | SkewY Number
-
-printTransform :: Transform -> String
-printTransform = case _ of
-  Matrix a_ b_ c_ d_ e_ f_ ->
-    "matrix(" <> (joinWith "," $ map show [a_, b_, c_, d_, e_, f_]) <> ")"
-  Translate x_ y_ ->
-    "translate(" <> (joinWith "," $ map show [x_, y_]) <> ")"
-  Scale x_ y_ ->
-    "scale(" <> (joinWith "," $ map show [x_, y_]) <> ")"
-  Rotate a_ x_ y_ ->
-    "rotate(" <> (joinWith "," $ map show [a_, x_, y_]) <> ")"
-  SkewX a_ ->
-    "skewX(" <> show a_ <> ")"
-  SkewY a_ ->
-    "skewY(" <> show a_ <> ")"
 
 attr :: forall r i. AttrName -> String -> IProp r i
 attr = coe Core.attr
