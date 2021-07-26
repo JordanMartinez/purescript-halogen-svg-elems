@@ -138,7 +138,8 @@ dur = attr (AttrName "dur") <<< printDuration
 fill :: forall r i. Maybe Color -> IProp (fill :: String | r) i
 fill = attr (AttrName "fill") <<< printColor
 
--- TODO this is just 'fill', but that function is already specialised to Color in this module
+{- TODO this is just 'fill', but that function is already specialised to Color
+   in this module -}
 fillAnim :: forall r i. FillState -> IProp (fill :: String | r) i
 fillAnim = attr (AttrName "fill") <<< printFillState
 
@@ -205,9 +206,11 @@ path = attr (AttrName "path") <<< joinWith " " <<< unwrapNewtype
     unwrapNewtype :: Array PathCommand -> Array String
     unwrapNewtype = unsafeCoerce
 
-preserveAspectRatio :: forall r i. Maybe {x_ :: Align, y_ :: Align} -> MeetOrSlice -> IProp (preserveAspectRatio :: String | r) i
-preserveAspectRatio align slice =
-  attr (AttrName "preserveAspectRatio") (joinWith " " $ [align_str, printMeetOrSlice slice])
+preserveAspectRatio :: forall r i. Maybe {x_ :: Align, y_ :: Align} ->
+  MeetOrSlice -> IProp (preserveAspectRatio :: String | r) i
+preserveAspectRatio align slice = attr
+  (AttrName "preserveAspectRatio")
+  (joinWith " " $ [align_str, printMeetOrSlice slice])
   where
     align_str = case align of
       Nothing -> "none"
@@ -265,8 +268,10 @@ text_anchor = attr (AttrName "text-anchor") <<< printTextAnchor
 transform :: forall r i . Array Transform -> IProp (transform :: String | r) i
 transform = attr (AttrName "transform") <<< joinWith " " <<< map printTransform
 
-viewBox :: forall r i. Number -> Number -> Number -> Number -> IProp (viewBox :: String | r) i
-viewBox x_ y_ w h_ = attr (AttrName "viewBox") (joinWith " " $ map show [x_, y_, w, h_])
+viewBox :: forall r i.
+  Number -> Number -> Number -> Number -> IProp (viewBox :: String | r) i
+viewBox x_ y_ w h_ =
+  attr (AttrName "viewBox") (joinWith " " $ map show [x_, y_, w, h_])
 
 width :: forall r i. Number -> IProp (width :: Number | r) i
 width = attr (AttrName "width") <<< show
