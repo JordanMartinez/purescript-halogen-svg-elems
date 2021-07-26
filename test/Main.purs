@@ -10,7 +10,7 @@ import Effect.Console (log)
 -- smoke test
 
 render :: forall t1 t2 t3 . t1 -> HH.HTML t2 t3
-render state =
+render _ =
   SE.svg [ SA.viewBox 0.0 0.0 100.0 100.0 ] [ SE.circle [ SA.r 10.0 ] ]
 
 -- not a real test, just making sure things compile

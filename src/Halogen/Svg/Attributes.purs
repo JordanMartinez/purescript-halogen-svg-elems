@@ -68,9 +68,9 @@ module Halogen.Svg.Attributes
 
 import Prelude
 
-import Data.Maybe (Maybe(..), maybe)
+import Data.Maybe (Maybe(..))
 import Data.Newtype (un)
-import Data.String (joinWith, toUpper)
+import Data.String (joinWith)
 import Halogen.HTML.Core (Prop, AttrName(AttrName), Namespace(Namespace), ClassName(..))
 import Halogen.HTML.Properties (IProp, attrNS)
 import Halogen.Svg.Attributes.Align (Align(..), printAlign)
@@ -95,7 +95,6 @@ import Halogen.Svg.Attributes.Path (
   CommandSweepChoice(..),
   m, l, h, v, c, s, q, t, a, z
   )
-
 
 attr :: forall r i. AttrName -> String -> IProp r i
 attr = coe Core.attr
