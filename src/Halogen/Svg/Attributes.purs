@@ -69,7 +69,8 @@ import Prelude
 import Data.Maybe (Maybe(..))
 import Data.Newtype (un)
 import Data.String (joinWith)
-import Halogen.HTML.Core (Prop, AttrName(AttrName), Namespace(Namespace), ClassName(..))
+import Halogen.HTML.Core (AttrName(AttrName))
+import Halogen.HTML.Core as H
 import Halogen.HTML.Properties (IProp, attrNS)
 import Halogen.Svg.Attributes.Align (Align(..), printAlign)
 import Halogen.Svg.Attributes.Baseline (Baseline(..), printBaseline)
@@ -97,7 +98,7 @@ import Halogen.Svg.Attributes.Path (
 attr :: forall r i. AttrName -> String -> IProp r i
 attr = coe Core.attr
   where
-    coe :: (AttrName -> String -> Prop i) -> AttrName -> String -> IProp r i
+    coe :: (AttrName -> String -> H.Prop i) -> AttrName -> String -> IProp r i
     coe = unsafeCoerce
 
 -- TODO ADT or free string?
@@ -108,13 +109,13 @@ attributeName = attr (AttrName "attributeName")
 begin :: forall r i. String -> IProp (begin :: String | r) i
 begin = attr (AttrName "begin")
 
-class_ :: forall r i . ClassName -> IProp (class :: String | r) i
-class_ = attr (AttrName "class") <<< un ClassName
+class_ :: forall r i . H.ClassName -> IProp (class :: String | r) i
+class_ = attr (AttrName "class") <<< un H.ClassName
 
-classes :: forall r i . Array ClassName -> IProp (class :: String | r) i
+classes :: forall r i . Array H.ClassName -> IProp (class :: String | r) i
 classes = attr (AttrName "class") <<< joinWith " " <<< unwrapNewtype
   where
-    unwrapNewtype :: Array ClassName -> Array String
+    unwrapNewtype :: Array H.ClassName -> Array String
     unwrapNewtype = unsafeCoerce
 
 cx :: forall r i. Number -> IProp (cx :: Number | r) i
@@ -301,4 +302,4 @@ y2 = attr (AttrName "y2") <<< show
 xlinkHref :: forall r i. String -> IProp (xlinkHref :: String | r) i
 -- xlinkHref = attr (AttrName "xlink:href")
 -- xlinkHref = attrNS (Namespace "xlink") (AttrName "href")
-xlinkHref = attrNS (Namespace "xlink") (AttrName "xlink:href")
+xlinkHref = attrNS (H.Namespace "xlink") (AttrName "xlink:href")
