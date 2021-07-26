@@ -299,5 +299,5 @@ y2 = attr (AttrName "y2") <<< show
 -- TODO xlink:href seems to have some issues, among others around its namespace
 xlinkHref :: forall r i. String -> IProp (xlinkHref :: String | r) i
 -- xlinkHref = attr (AttrName "xlink:href")
--- xlinkHref = attrNS (Namespace "xlink") (AttrName "href")
+-- xlinkHref = attrNS (H.Namespace "xlink") (AttrName "href")
 xlinkHref = attrNS (H.Namespace "xlink") (AttrName "xlink:href")
