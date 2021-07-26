@@ -60,12 +60,10 @@ module Halogen.Svg.Attributes
   , x1, y1
   , x2, y2
   , xlinkHref
-  )
-  where
+  ) where
 -- Like Halogen.HTML.Properties
 
 import Prelude
-
 import Data.Maybe (Maybe(..))
 import Data.Newtype (un)
 import Data.String (joinWith)
