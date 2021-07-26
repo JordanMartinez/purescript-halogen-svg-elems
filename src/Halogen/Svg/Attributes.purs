@@ -67,7 +67,6 @@ import Prelude
 import Data.Maybe (Maybe(..))
 import Data.Newtype (un)
 import Data.String (joinWith)
-import Halogen.HTML.Core (AttrName(AttrName))
 import Halogen.HTML.Core as H
 import Halogen.HTML.Properties (IProp, attrNS)
 import Halogen.Svg.Attributes.Align (Align(..), printAlign)
@@ -93,114 +92,114 @@ import Halogen.Svg.Attributes.Path (
   m, l, h, v, c, s, q, t, a, z
   )
 
-attr :: forall r i. AttrName -> String -> IProp r i
+attr :: forall r i. H.AttrName -> String -> IProp r i
 attr = coe Core.attr
   where
-    coe :: (AttrName -> String -> H.Prop i) -> AttrName -> String -> IProp r i
+    coe :: (H.AttrName -> String -> H.Prop i) -> H.AttrName -> String -> IProp r i
     coe = unsafeCoerce
 
 -- TODO ADT or free string?
 attributeName :: forall r i. String -> IProp (attributeName :: String | r) i
-attributeName = attr (AttrName "attributeName")
+attributeName = attr (H.AttrName "attributeName")
 
 -- https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/begin
 begin :: forall r i. String -> IProp (begin :: String | r) i
-begin = attr (AttrName "begin")
+begin = attr (H.AttrName "begin")
 
 class_ :: forall r i . H.ClassName -> IProp (class :: String | r) i
-class_ = attr (AttrName "class") <<< un H.ClassName
+class_ = attr (H.AttrName "class") <<< un H.ClassName
 
 classes :: forall r i . Array H.ClassName -> IProp (class :: String | r) i
-classes = attr (AttrName "class") <<< joinWith " " <<< unwrapNewtype
+classes = attr (H.AttrName "class") <<< joinWith " " <<< unwrapNewtype
   where
     unwrapNewtype :: Array H.ClassName -> Array String
     unwrapNewtype = unsafeCoerce
 
 cx :: forall r i. Number -> IProp (cx :: Number | r) i
-cx = attr (AttrName "cx") <<< show
+cx = attr (H.AttrName "cx") <<< show
 
 cy :: forall r i. Number -> IProp (cy :: Number | r) i
-cy = attr (AttrName "cy") <<< show
+cy = attr (H.AttrName "cy") <<< show
 
 d :: forall r i . Array PathCommand -> IProp (d :: String | r) i
-d = attr (AttrName "d") <<< joinWith " " <<< unwrapNewtype
+d = attr (H.AttrName "d") <<< joinWith " " <<< unwrapNewtype
   where
     unwrapNewtype :: Array PathCommand -> Array String
     unwrapNewtype = unsafeCoerce
 
 dominant_baseline :: forall r i . Baseline -> IProp (transform :: String | r) i
-dominant_baseline = attr (AttrName "dominant-baseline") <<< printBaseline
+dominant_baseline = attr (H.AttrName "dominant-baseline") <<< printBaseline
 
 dur :: forall r i. Duration -> IProp (dur :: String | r) i
-dur = attr (AttrName "dur") <<< printDuration
+dur = attr (H.AttrName "dur") <<< printDuration
 
 fill :: forall r i. Maybe Color -> IProp (fill :: String | r) i
-fill = attr (AttrName "fill") <<< printColor
+fill = attr (H.AttrName "fill") <<< printColor
 
 {- TODO this is just 'fill', but that function is already specialised to Color
    in this module -}
 fillAnim :: forall r i. FillState -> IProp (fill :: String | r) i
-fillAnim = attr (AttrName "fill") <<< printFillState
+fillAnim = attr (H.AttrName "fill") <<< printFillState
 
 fillOpacity :: forall r i. Number -> IProp (fillOpacity :: Number | r) i
-fillOpacity = attr (AttrName "fill-opacity") <<< show
+fillOpacity = attr (H.AttrName "fill-opacity") <<< show
 
 font_family :: forall r i. String -> IProp (font_family :: String | r) i
-font_family = attr (AttrName "font-family")
+font_family = attr (H.AttrName "font-family")
 
 font_size :: forall r i. FontSize -> IProp (font_size :: String | r) i
-font_size = attr (AttrName "font-size") <<< show
+font_size = attr (H.AttrName "font-size") <<< show
 
 font_size_adjust :: forall r i. Number -> IProp (font_size_adjust :: String | r) i
-font_size_adjust = attr (AttrName "font-size-adjust") <<< show
+font_size_adjust = attr (H.AttrName "font-size-adjust") <<< show
 
 font_stretch :: forall r i. String -> IProp (font_stretch :: String | r) i
-font_stretch = attr (AttrName "font-stretch")
+font_stretch = attr (H.AttrName "font-stretch")
 
 font_style :: forall r i. String -> IProp (font_style :: String | r) i
-font_style = attr (AttrName "font-style")
+font_style = attr (H.AttrName "font-style")
 
 font_variant :: forall r i. String -> IProp (font_variant :: String | r) i
-font_variant = attr (AttrName "font-variant")
+font_variant = attr (H.AttrName "font-variant")
 
 font_weight :: forall r i. String -> IProp (font_weight :: String | r) i
-font_weight = attr (AttrName "font-weight")
+font_weight = attr (H.AttrName "font-weight")
 
 -- https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/from
 from :: forall r i. String -> IProp (from :: String | r) i
-from = attr (AttrName "from")
+from = attr (H.AttrName "from")
 
 -- https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/to
 to :: forall r i. String -> IProp (to :: String | r) i
-to = attr (AttrName "to")
+to = attr (H.AttrName "to")
 
 id :: forall r i . String -> IProp (id :: String | r) i
-id = attr (AttrName "id")
+id = attr (H.AttrName "id")
 
 markerStart :: forall r i. String -> IProp (markerStart :: String | r) i
-markerStart = attr (AttrName "marker-start")
+markerStart = attr (H.AttrName "marker-start")
 
 markerMid :: forall r i. String -> IProp (markerMid :: String | r) i
-markerMid = attr (AttrName "marker-mid")
+markerMid = attr (H.AttrName "marker-mid")
 
 markerEnd :: forall r i. String -> IProp (markerEnd :: String | r) i
-markerEnd = attr (AttrName "marker-end")
+markerEnd = attr (H.AttrName "marker-end")
 
 markerUnits :: forall r i. MarkerUnit -> IProp (markerUnits :: String | r) i
-markerUnits = attr (AttrName "markerUnits") <<< printMarkerUnit
+markerUnits = attr (H.AttrName "markerUnits") <<< printMarkerUnit
 
 markerWidth :: forall r i. Number -> IProp (markerWidth :: Number | r) i
-markerWidth = attr (AttrName "markerWidth") <<< show
+markerWidth = attr (H.AttrName "markerWidth") <<< show
 
 markerHeight :: forall r i. Number -> IProp (markerHeight :: Number | r) i
-markerHeight = attr (AttrName "markerHeight") <<< show
+markerHeight = attr (H.AttrName "markerHeight") <<< show
 
 orient :: forall r i. Orient -> IProp (orient :: String | r) i
-orient = attr (AttrName "orient") <<< printOrient
+orient = attr (H.AttrName "orient") <<< printOrient
 
 -- TODO copied from `d`; adapt where needed
 path :: forall r i . Array PathCommand -> IProp (path :: String | r) i
-path = attr (AttrName "path") <<< joinWith " " <<< unwrapNewtype
+path = attr (H.AttrName "path") <<< joinWith " " <<< unwrapNewtype
   where
     unwrapNewtype :: Array PathCommand -> Array String
     unwrapNewtype = unsafeCoerce
@@ -208,7 +207,7 @@ path = attr (AttrName "path") <<< joinWith " " <<< unwrapNewtype
 preserveAspectRatio :: forall r i. Maybe {x_ :: Align, y_ :: Align} ->
   MeetOrSlice -> IProp (preserveAspectRatio :: String | r) i
 preserveAspectRatio align slice = attr
-  (AttrName "preserveAspectRatio")
+  (H.AttrName "preserveAspectRatio")
   (joinWith " " $ [align_str, printMeetOrSlice slice])
   where
     align_str = case align of
@@ -216,88 +215,88 @@ preserveAspectRatio align slice = attr
       Just {x_, y_} -> joinWith "" $ ["x", printAlign x_, "Y", printAlign y_]
 
 r :: forall s i. Number -> IProp (r :: Number | s) i
-r = attr (AttrName "r") <<< show
+r = attr (H.AttrName "r") <<< show
 
 refX :: forall r i. Number -> IProp (refX :: Number | r) i
-refX = attr (AttrName "refX") <<< show
+refX = attr (H.AttrName "refX") <<< show
 
 refY :: forall r i. Number -> IProp (refY :: Number | r) i
-refY = attr (AttrName "refY") <<< show
+refY = attr (H.AttrName "refY") <<< show
 
 repeatCount :: forall r i. Int -> IProp (repeatCount :: Int | r) i
-repeatCount = attr (AttrName "repeatCount") <<< show
+repeatCount = attr (H.AttrName "repeatCount") <<< show
 
 rx :: forall r i. Number -> IProp (rx :: Number | r) i
-rx = attr (AttrName "rx") <<< show
+rx = attr (H.AttrName "rx") <<< show
 
 ry :: forall r i. Number -> IProp (ry :: Number | r) i
-ry = attr (AttrName "ry") <<< show
+ry = attr (H.AttrName "ry") <<< show
 
 -- TODO add other constructors
 seconds :: Number -> Duration
 seconds s_ = Duration Nothing Nothing (Just s_) Nothing
 
 stroke :: forall r i. Maybe Color -> IProp (stroke :: String | r) i
-stroke = attr (AttrName "stroke") <<< printColor
+stroke = attr (H.AttrName "stroke") <<< printColor
 
 stroke_dasharray :: forall r i. String -> IProp (strokeDasharray :: String | r) i
-stroke_dasharray = attr (AttrName "stroke-dasharray")
+stroke_dasharray = attr (H.AttrName "stroke-dasharray")
 
 stroke_dashoffset :: forall r i. Number -> IProp (strokeDashoffset :: String | r) i
-stroke_dashoffset = attr (AttrName "stroke-dashoffset") <<< show
+stroke_dashoffset = attr (H.AttrName "stroke-dashoffset") <<< show
 
 stroke_linecap :: forall r i. String -> IProp (strokeLinecap :: String | r) i
-stroke_linecap = attr (AttrName "stroke-linecap")
+stroke_linecap = attr (H.AttrName "stroke-linecap")
 
 stroke_linejoin :: forall r i. String -> IProp (strokeLinejoin :: String | r) i
-stroke_linejoin = attr (AttrName "stroke-linejoin")
+stroke_linejoin = attr (H.AttrName "stroke-linejoin")
 
 stroke_miterlimit :: forall r i. String -> IProp (strokeMiterlimit :: String | r) i
-stroke_miterlimit = attr (AttrName "stroke-miterlimit")
+stroke_miterlimit = attr (H.AttrName "stroke-miterlimit")
 
 stroke_opacity :: forall r i. Number -> IProp (strokeOpacity :: String | r) i
-stroke_opacity = attr (AttrName "stroke-opacity") <<< show
+stroke_opacity = attr (H.AttrName "stroke-opacity") <<< show
 
 strokeWidth :: forall r i. Number -> IProp (strokeWidth :: Number | r) i
-strokeWidth = attr (AttrName "stroke-width") <<< show
+strokeWidth = attr (H.AttrName "stroke-width") <<< show
 
 text_anchor :: forall r i . TextAnchor -> IProp (text_anchor :: String | r) i
-text_anchor = attr (AttrName "text-anchor") <<< printTextAnchor
+text_anchor = attr (H.AttrName "text-anchor") <<< printTextAnchor
 
 transform :: forall r i . Array Transform -> IProp (transform :: String | r) i
-transform = attr (AttrName "transform") <<< joinWith " " <<< map printTransform
+transform = attr (H.AttrName "transform") <<< joinWith " " <<< map printTransform
 
 viewBox :: forall r i.
   Number -> Number -> Number -> Number -> IProp (viewBox :: String | r) i
 viewBox x_ y_ w h_ =
-  attr (AttrName "viewBox") (joinWith " " $ map show [x_, y_, w, h_])
+  attr (H.AttrName "viewBox") (joinWith " " $ map show [x_, y_, w, h_])
 
 width :: forall r i. Number -> IProp (width :: Number | r) i
-width = attr (AttrName "width") <<< show
+width = attr (H.AttrName "width") <<< show
 
 height :: forall r i. Number -> IProp (height :: Number | r) i
-height = attr (AttrName "height") <<< show
+height = attr (H.AttrName "height") <<< show
 
 x :: forall r i. Number -> IProp (x :: Number | r) i
-x = attr (AttrName "x") <<< show
+x = attr (H.AttrName "x") <<< show
 
 y :: forall r i. Number -> IProp (y :: Number | r) i
-y = attr (AttrName "y") <<< show
+y = attr (H.AttrName "y") <<< show
 
 x1 :: forall r i. Number -> IProp (x1 :: Number | r) i
-x1 = attr (AttrName "x1") <<< show
+x1 = attr (H.AttrName "x1") <<< show
 
 y1 :: forall r i. Number -> IProp (y1 :: Number | r) i
-y1 = attr (AttrName "y1") <<< show
+y1 = attr (H.AttrName "y1") <<< show
 
 x2 :: forall r i. Number -> IProp (x2 :: Number | r) i
-x2 = attr (AttrName "x2") <<< show
+x2 = attr (H.AttrName "x2") <<< show
 
 y2 :: forall r i. Number -> IProp (y2 :: Number | r) i
-y2 = attr (AttrName "y2") <<< show
+y2 = attr (H.AttrName "y2") <<< show
 
 -- TODO xlink:href seems to have some issues, among others around its namespace
 xlinkHref :: forall r i. String -> IProp (xlinkHref :: String | r) i
--- xlinkHref = attr (AttrName "xlink:href")
--- xlinkHref = attrNS (H.Namespace "xlink") (AttrName "href")
-xlinkHref = attrNS (H.Namespace "xlink") (AttrName "xlink:href")
+-- xlinkHref = attr (H.AttrName "xlink:href")
+-- xlinkHref = attrNS (H.Namespace "xlink") (H.AttrName "href")
+xlinkHref = attrNS (H.Namespace "xlink") (H.AttrName "xlink:href")
