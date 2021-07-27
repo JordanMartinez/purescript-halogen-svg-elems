@@ -3,6 +3,8 @@ module Halogen.Svg.Attributes.Align
   , printAlign
   ) where
 
+import Prelude
+
 data Align
   = Min
   | Mid

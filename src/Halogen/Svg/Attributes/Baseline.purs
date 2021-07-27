@@ -3,6 +3,8 @@ module Halogen.Svg.Attributes.Baseline
   , printBaseline
   ) where
 
+import Prelude
+
 data Baseline
   = Auto
   | UseScript

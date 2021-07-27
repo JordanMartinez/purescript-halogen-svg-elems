@@ -3,6 +3,8 @@ module Halogen.Svg.Attributes.MeetOrSlice
   , printMeetOrSlice
   ) where
 
+import Prelude
+
 data MeetOrSlice
   = Meet
   | Slice

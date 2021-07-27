@@ -14,7 +14,7 @@ import Data.Maybe (Maybe, maybe)
 data DurationF a = Duration (Maybe a) (Maybe a) (Maybe a) (Maybe a)
 -- ^ TODO hours minutes seconds millis
 
-derive instance eqDurationF :: Eq DurationF
+derive instance eqDurationF :: Eq a => Eq (DurationF a)
 
 derive instance functorDurationF :: Functor DurationF
 

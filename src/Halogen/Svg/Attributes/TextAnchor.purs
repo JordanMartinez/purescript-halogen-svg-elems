@@ -3,6 +3,8 @@ module Halogen.Svg.Attributes.TextAnchor
   , printTextAnchor
   ) where
 
+import Prelude
+
 data TextAnchor
   = Start
   | AnchorMiddle

@@ -3,6 +3,8 @@ module Halogen.Svg.Attributes.FillState
   , printFillState
   ) where
 
+import Prelude
+
 data FillState
   = Freeze
   | Remove
