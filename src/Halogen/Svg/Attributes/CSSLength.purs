@@ -21,6 +21,8 @@ data CSSLength
   | Pct Number
   | Nil
 
+derive instance eqCSSLength :: Eq CSSLength
+
 instance showCSSLength :: Show CSSLength where
   show = case _ of
     Cm i     -> show i <> "cm"

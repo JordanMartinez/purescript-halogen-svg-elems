@@ -17,6 +17,8 @@ data FontSize
   | Larger
   | FontSizeLength CSSLength
 
+derive instance eqFontSize :: Eq FontSize
+
 instance showFontSize :: Show FontSize where
   show = case _ of
     XXSmall -> "xx-small"

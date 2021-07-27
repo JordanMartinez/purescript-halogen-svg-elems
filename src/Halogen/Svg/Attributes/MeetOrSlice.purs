@@ -7,6 +7,8 @@ data MeetOrSlice
   = Meet
   | Slice
 
+derive instance eqMeetOrSlice :: Eq MeetOrSlice
+
 printMeetOrSlice :: MeetOrSlice -> String
 printMeetOrSlice = case _ of
   Meet  -> "meet"

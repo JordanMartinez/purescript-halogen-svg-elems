@@ -14,6 +14,8 @@ data Transform
   | SkewX Number
   | SkewY Number
 
+derive instance eqTransform :: Eq Transform
+
 printTransform :: Transform -> String
 printTransform = case _ of
   Matrix a b c d e f -> "matrix("    <> printArray [a, b, c, d, e, f] <> ")"

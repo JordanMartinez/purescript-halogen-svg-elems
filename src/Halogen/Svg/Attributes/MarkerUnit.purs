@@ -9,6 +9,8 @@ data MarkerUnit
   = UserSpaceOnUse
   | StrokeWidth
 
+derive instance eqMarkerUnit :: Eq MarkerUnit
+
 instance showMarkerUnit :: Show MarkerUnit where
   show = case _ of
     UserSpaceOnUse -> "userSpaceOnUse"

@@ -11,6 +11,8 @@ data Color = RGB Int Int Int
            | RGBA Int Int Int Number
            | Named String
 
+derive instance eqColor :: Eq Color
+
 printColor :: Maybe Color -> String
 printColor = case _ of
   Just (RGB r g b)    -> "rgb("  <> printArray [r, g, b] <> ")"

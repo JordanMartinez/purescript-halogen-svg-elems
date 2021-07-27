@@ -8,6 +8,8 @@ data TextAnchor
   | AnchorMiddle
   | End
 
+derive instance eqTextAnchor :: Eq TextAnchor
+
 printTextAnchor :: TextAnchor -> String
 printTextAnchor = case _ of
   Start        -> "start"

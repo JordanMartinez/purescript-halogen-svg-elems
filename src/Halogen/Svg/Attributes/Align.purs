@@ -8,6 +8,8 @@ data Align
   | Mid
   | Max
 
+derive instance eqAlign :: Eq Align
+
 printAlign :: Align -> String
 printAlign = case _ of
   Min -> "Min"

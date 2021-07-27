@@ -9,6 +9,8 @@ data Orient
   = AutoOrient
   | AutoStartReverse
 
+derive instance eqOrient :: Eq Orient
+
 instance showOrient :: Show Orient where
   show = case _ of
     AutoOrient       -> "auto"

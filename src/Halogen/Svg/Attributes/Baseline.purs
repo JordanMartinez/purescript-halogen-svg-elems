@@ -17,6 +17,8 @@ data Baseline
   | TextAfterEdge
   | TextBeforeEdge
 
+derive instance eqBaseline :: Eq Baseline
+
 printBaseline :: Baseline -> String
 printBaseline = case _ of
   Auto           -> "auto"
