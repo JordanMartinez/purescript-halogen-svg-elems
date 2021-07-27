@@ -32,7 +32,12 @@ instance showFontSize :: Show FontSize where
     Smaller -> "smaller"
     Larger -> "larger"
     FontSizeLength l -> printCSSLength l
-{- The documentation for Show says "While not required, it is recommended that for any expression x, the string show x be executable PureScript code which evaluates to the same value as the expression x." The instance of Show above predates the use of printFontSize and does not follow that recommendation. This may be changed in a future version and `show` when generating SVG is depreciated. Use printFontSize instead.
+{- The documentation for Show says "While not required, it is recommended that
+for any expression x, the string show x be executable PureScript code which
+evaluates to the same value as the expression x." The instance of Show above
+predates the use of printFontSize and does not follow that recommendation. This
+may be changed in a future version and `show` when generating SVG is
+depreciated. Use printFontSize instead.
 -}
 
 printFontSize :: FontSize -> String
