@@ -9,6 +9,7 @@ module Halogen.Svg.Attributes.Duration
 
 import Prelude
 import Data.Maybe (Maybe, maybe)
+import Halogen.Svg.Attributes.Utils (showWithSpaces)
 
 -- | https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/dur
 data DurationF a = Duration (Maybe a) (Maybe a) (Maybe a) (Maybe a)
@@ -17,6 +18,9 @@ data DurationF a = Duration (Maybe a) (Maybe a) (Maybe a) (Maybe a)
 derive instance eqDurationF :: Eq a => Eq (DurationF a)
 
 derive instance functorDurationF :: Functor DurationF
+
+instance showDurationF :: Show Duration where
+  show (Duration h m s i) = "(Duration " <> showWithSpaces [h, m, s, i] <> ")"
 
 printDurationF :: forall a. Show a => DurationF a -> String
 printDurationF (Duration h m s i) = f "h" h <> f "m" m <> f "s" s <> f "i" i

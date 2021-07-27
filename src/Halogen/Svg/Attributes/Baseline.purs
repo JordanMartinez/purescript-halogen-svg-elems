@@ -21,6 +21,21 @@ data Baseline
 
 derive instance eqBaseline :: Eq Baseline
 
+instance showBaseline :: Show Baseline where
+  show = case _ of
+    Auto           -> "Auto"
+    UseScript      -> "UseScript"
+    NoChange       -> "NoChange"
+    ResetSize      -> "ResetSize"
+    Ideographic    -> "Ideographic"
+    Alphabetic     -> "Alphabetic"
+    Hanging        -> "Hanging"
+    Mathematical   -> "Mathematical"
+    Central        -> "Central"
+    BaselineMiddle -> "BaselineMiddle"
+    TextAfterEdge  -> "TextAfterEdge"
+    TextBeforeEdge -> "TextBeforeEdge"
+
 printBaseline :: Baseline -> String
 printBaseline = case _ of
   Auto           -> "auto"

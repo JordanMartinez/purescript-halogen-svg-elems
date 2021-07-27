@@ -12,6 +12,12 @@ data Align
 
 derive instance eqAlign :: Eq Align
 
+instance showAlign :: Show Align where
+  show = case _ of
+    Min -> "Min"
+    Mid -> "Mid"
+    Max -> "Max"
+
 printAlign :: Align -> String
 printAlign = case _ of
   Min -> "Min"

@@ -11,6 +11,11 @@ data FillState
 
 derive instance eqFillState :: Eq FillState
 
+instance showFillState :: Show FillState where
+  show = case _ of
+    Freeze -> "Freeze"
+    Remove -> "Remove"
+
 printFillState :: FillState -> String
 printFillState = case _ of
   Freeze -> "freeze"
