@@ -72,11 +72,11 @@ import Halogen.HTML.Properties (IProp, attrNS)
 import Halogen.Svg.Attributes.Align (Align(..), printAlign)
 import Halogen.Svg.Attributes.Baseline (Baseline(..), printBaseline)
 import Halogen.Svg.Attributes.Color (Color(..), printColor)
-import Halogen.Svg.Attributes.CSSLength (CSSLength(..))
+import Halogen.Svg.Attributes.CSSLength (CSSLength(..), printCSSLength)
 import Halogen.Svg.Attributes.Duration ( Duration, printDuration
                                        , DurationF(..), printDurationF )
 import Halogen.Svg.Attributes.FillState (FillState(..), printFillState)
-import Halogen.Svg.Attributes.FontSize (FontSize(..))
+import Halogen.Svg.Attributes.FontSize (FontSize(..), printFontSize)
 import Halogen.Svg.Attributes.MarkerUnit (MarkerUnit(..), printMarkerUnit)
 import Halogen.Svg.Attributes.MeetOrSlice (MeetOrSlice(..), printMeetOrSlice)
 import Halogen.Svg.Attributes.Orient (Orient(..), printOrient)
@@ -148,7 +148,7 @@ font_family :: forall r i. String -> IProp (font_family :: String | r) i
 font_family = attr (H.AttrName "font-family")
 
 font_size :: forall r i. FontSize -> IProp (font_size :: String | r) i
-font_size = attr (H.AttrName "font-size") <<< show
+font_size = attr (H.AttrName "font-size") <<< printFontSize
 
 font_size_adjust :: forall r i. Number -> IProp (font_size_adjust :: String | r) i
 font_size_adjust = attr (H.AttrName "font-size-adjust") <<< show

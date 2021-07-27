@@ -1,9 +1,10 @@
 module Halogen.Svg.Attributes.FontSize
   ( FontSize(..)
+  , printFontSize
   ) where
 
 import Prelude
-import Halogen.Svg.Attributes.CSSLength (CSSLength)
+import Halogen.Svg.Attributes.CSSLength (CSSLength, printCSSLength)
 
 data FontSize
   = XXSmall
@@ -30,4 +31,19 @@ instance showFontSize :: Show FontSize where
     XXLarge -> "xx-large"
     Smaller -> "smaller"
     Larger -> "larger"
-    FontSizeLength l -> show l
+    FontSizeLength l -> printCSSLength l
+{- The documentation for Show says "While not required, it is recommended that for any expression x, the string show x be executable PureScript code which evaluates to the same value as the expression x." The instance of Show above predates the use of printFontSize and does not follow that recommendation. This may be changed in a future version and `show` when generating SVG is depreciated. Use printFontSize instead.
+-}
+
+printFontSize :: FontSize -> String
+printFontSize = case _ of
+  XXSmall -> "xx-small"
+  XSmall -> "x-small"
+  Small -> "small"
+  Medium -> "medium"
+  Large -> "large"
+  XLarge -> "x-large"
+  XXLarge -> "xx-large"
+  Smaller -> "smaller"
+  Larger -> "larger"
+  FontSizeLength l -> printCSSLength l
