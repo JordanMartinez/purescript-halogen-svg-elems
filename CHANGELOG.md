@@ -6,6 +6,7 @@ Notable changes to this project are documented in this file. The format is based
 
 Other improvements:
 - Reformatted to a consistent style and created seperate files for each ADT
+- All ADTs have Show and Eq instances
 
 ## [v4.0.0](https://github.com/JordanMartinez/purescript-halogen-svg-elems/releases/tag/v4.0.0) - 2021-07-22
 
