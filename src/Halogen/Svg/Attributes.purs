@@ -92,6 +92,12 @@ import Halogen.Svg.Attributes.Path (
   m, l, h, v, c, s, q, t, a, z
   )
 
+-- Each attribute has two functions: show from the type class Show
+-- and printX where X corresponds to the type. When printing the value
+-- for SVG attributes, use the printX function. For example:
+--   `fill = attr (H.AttrName "fill") <<< printColor`
+-- When debugging, use either show or printX.
+
 attr :: forall r i. H.AttrName -> String -> IProp r i
 attr = coe Core.attr
   where
