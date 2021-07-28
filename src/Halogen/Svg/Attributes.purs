@@ -1,9 +1,10 @@
--- Each attribute has two functions: show from the type class Show
--- and printX where X corresponds to the type. When printing the value
--- for SVG attributes, use the printX function. For example:
---   `fill = attr (H.AttrName "fill") <<< printColor`
--- When debugging, use either show or printX.
-
+-- | Each attribute has two functions: `show` from the type class `Show` and
+-- | `printX` where X corresponds to the type. When printing the value for SVG
+-- | attributes, use the `printX` function. For example:
+-- |
+-- |   `fill = attr (H.AttrName "fill") <<< printColor`
+-- |
+-- | When debugging, use either `show` or `printX`.
 module Halogen.Svg.Attributes
   ( module Halogen.Svg.Attributes.Align
   , module Halogen.Svg.Attributes.Baseline
