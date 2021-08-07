@@ -13,6 +13,7 @@ You can edit this file as you like.
   , "newtype"
   , "prelude"
   , "psci-support"
+  , "safe-coerce"
   , "strings"
   , "typelevel-prelude"
   , "unsafe-coerce"

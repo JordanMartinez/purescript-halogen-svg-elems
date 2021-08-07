@@ -3,12 +3,14 @@ module Halogen.Svg.Attributes.Path
   , CommandPositionReference(..)
   , CommandArcChoice(..)
   , CommandSweepChoice(..)
+  , toArrayString
   , m, l, h, v, c, s, q, t, a, z
   ) where
 
 import Prelude
 import Data.String (toUpper)
 import Halogen.Svg.Attributes.Utils (printArray)
+import Safe.Coerce (coerce)
 
 newtype PathCommand = PathCommand String
 
@@ -19,6 +21,9 @@ instance showPathCommand :: Show PathCommand where
 
 printPathCommand :: PathCommand -> String
 printPathCommand (PathCommand s_) = s_
+
+toArrayString :: Array PathCommand -> Array String
+toArrayString = coerce
 
 data CommandPositionReference = Rel | Abs
 
