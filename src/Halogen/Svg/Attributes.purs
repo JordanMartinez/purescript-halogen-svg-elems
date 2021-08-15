@@ -71,7 +71,6 @@ module Halogen.Svg.Attributes
   ) where
 -- Like Halogen.HTML.Properties
 
--- Like Halogen.HTML.Properties
 import Prelude
 import Data.Maybe (Maybe(..))
 import Data.Newtype (un)

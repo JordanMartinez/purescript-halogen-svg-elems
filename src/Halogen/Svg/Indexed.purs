@@ -247,9 +247,8 @@ type SVGimage
       )
 
 -- TODO should this have GlobalAttributes?
-type SVGmpath
-  = ( xlinkHref :: String )
+type SVGmpath = (xlinkHref :: String)
 
 --------------------------------------------------------------------------------
-type SVGtitle
-  = GlobalAttributes ()
+
+type SVGtitle = GlobalAttributes ()

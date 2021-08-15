@@ -20,7 +20,6 @@ module Halogen.Svg.Elements
   ) where
 -- Like Halogen.HTML.Elements
 
--- Like Halogen.HTML.Elements
 import Prelude
 import Halogen.HTML.Core (HTML, Prop, ElemName(ElemName))
 import Halogen.HTML.Elements (Node, Leaf)
@@ -64,7 +63,7 @@ line props = element (ElemName "line") props []
 text :: forall p i. Node I.SVGtext p i
 text = element (ElemName "text")
 
-foreignObject :: forall p i. Node I.SVGforeignObject p i
+foreignObject :: forall p i . Node I.SVGforeignObject p i
 foreignObject = element (ElemName "foreignObject")
 
 defs :: forall p i. Node I.SVGg p i
@@ -74,6 +73,7 @@ marker :: forall p i. Node I.SVGmarker p i
 marker = element $ ElemName "marker"
 
 --------------------------------------------------------------------------------
+
 animate :: forall p i. Leaf I.SVGanimate p i
 animate props = element (ElemName "animate") props []
 
@@ -90,5 +90,6 @@ mpath :: forall p i. Leaf I.SVGmpath p i
 mpath props = element (ElemName "mpath") props []
 
 --------------------------------------------------------------------------------
+
 title :: forall p i. Node I.SVGtitle p i
 title = element (ElemName "title")
