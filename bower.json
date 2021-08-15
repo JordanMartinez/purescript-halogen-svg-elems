@@ -1,5 +1,5 @@
 {
-  "name": "purescript-halogen-svg",
+  "name": "purescript-halogen-svg-elems",
   "authors": [
     "Kai Wohlfahrt <kai.wohlfahrt@gmail.com>"
   ],
@@ -11,15 +11,13 @@
     "output"
   ],
   "dependencies": {
-    "purescript-strings": "^3.3.1",
-    "purescript-halogen": "^5.0.0",
-    "purescript-dom-indexed": "^5.0.0"
+    "purescript-halogen": "^6.0.0"
   },
   "devDependencies": {
-    "purescript-psci-support": "^3.0.0"
+    "purescript-psci-support": "^5.0.0"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/kwohlfahrt/purescript-halogen-svg.git"
+    "url": "https://github.com/JordanMartinez/purescript-halogen-svg-elems.git"
   }
 }

@@ -1,21 +1,32 @@
-module Halogen.Svg.Core where
+module Halogen.Svg.Core
+  ( ns
+  , element
+  , attr
+  ) where
 -- Like Halogen.HTML.Core
 
 import Prelude
 import Data.Maybe (Maybe(..))
-import Halogen.HTML.Core (HTML, Prop(Attribute), Namespace(Namespace), AttrName(AttrName))
+import Halogen.HTML.Core as H
 import Halogen.VDom (ElemName, VDom(Elem))
 import Unsafe.Coerce (unsafeCoerce)
 
-ns :: Maybe Namespace
-ns = Just $ Namespace "http://www.w3.org/2000/svg"
+ns :: Maybe H.Namespace
+ns = Just $ H.Namespace "http://www.w3.org/2000/svg"
 
-element :: forall p i. ElemName -> Array (Prop i) -> Array (HTML p i) -> HTML p i
+element :: forall p i.
+  ElemName -> Array (H.Prop i) -> Array (H.HTML p i) -> H.HTML p i
 element = coe (\name props children -> Elem ns name props children)
   where
-    coe :: (ElemName -> Array (Prop i) -> Array (VDom (Array (Prop i)) p) -> VDom (Array (Prop i)) p)
-        -> ElemName -> Array (Prop i) -> Array (HTML p i) -> HTML p i
+    coe ::  (ElemName -> Array (H.Prop i) -> Array (VDom (Array (H.Prop i)) p) ->
+            VDom (Array (H.Prop i)) p) -> ElemName -> Array (H.Prop i) ->
+            Array (H.HTML p i) -> H.HTML p i
     coe = unsafeCoerce
+{- The type signature of `coe` is a little involved. The core coercion is from
+      VDom (Array (H.Prop i)) p
+   to
+      H.HTML p i
+ -}
 
-attr :: forall i. AttrName -> String -> Prop i
-attr (AttrName name) = Attribute Nothing name
+attr :: forall i. H.AttrName -> String -> H.Prop i
+attr (H.AttrName name) = H.Attribute Nothing name

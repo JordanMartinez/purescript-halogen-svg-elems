@@ -4,12 +4,20 @@ You can edit this file as you like.
 -}
 { name = "halogen-svg"
 , dependencies =
-  [ "console"
+  [ "aff"
+  , "console"
   , "effect"
   , "halogen"
+  , "halogen-vdom"
+  , "maybe"
+  , "newtype"
   , "prelude"
   , "psci-support"
+  , "safe-coerce"
   , "strings"
+  , "typelevel-prelude"
+  , "unsafe-coerce"
+  , "web-html"
   , "web-uievents"
   ]
 , packages = ./packages.dhall

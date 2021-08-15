@@ -1,8 +1,0 @@
-language: node_js
-dist: trusty
-sudo: required
-node_js: 8
-install:
-  - npm install -g spago purescript
-script:
-  - spago test
