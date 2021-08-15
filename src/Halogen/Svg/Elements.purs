@@ -3,6 +3,7 @@ module Halogen.Svg.Elements
   , svg
   , g
   , circle
+  , image
   , ellipse
   , rect
   , path

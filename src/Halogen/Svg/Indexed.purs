@@ -22,6 +22,7 @@ module Halogen.Svg.Indexed
   , AnimationAttributes
   , SVGanimate
   , SVGanimateMotion
+  , SVGimage
   , SVGmpath
   , SVGtitle
   ) where
@@ -234,6 +235,16 @@ type AnimationAttributes r = GlobalAttributes
 type SVGanimate = AnimationAttributes (attributeName :: String)
 
 type SVGanimateMotion = AnimationAttributes (path :: String)
+
+type SVGimage
+  = GlobalAttributes
+      ( x :: Number
+      , y :: Number
+      , width :: Number
+      , height :: Number
+      , href :: String
+      , preserveAspectRatio :: String
+      )
 
 -- TODO should this have GlobalAttributes?
 type SVGmpath
