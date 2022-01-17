@@ -270,8 +270,8 @@ type SVGtext
   +
     ( x :: Number
     , y :: Number
-    , text_anchor :: String
-    , dominant_baseline :: String
+    , textAnchor :: String
+    , dominantBaseline :: String
     , transform :: String
     )
 

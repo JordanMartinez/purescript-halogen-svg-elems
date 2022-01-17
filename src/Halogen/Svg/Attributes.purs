@@ -143,7 +143,7 @@ cy = attr (H.AttrName "cy") <<< show
 d :: forall r i. Array PathCommand -> IProp (d :: String | r) i
 d = attr (H.AttrName "d") <<< joinWith " " <<< toArrayString
 
-dominantBaseline :: forall r i. Baseline -> IProp (transform :: String | r) i
+dominantBaseline :: forall r i. Baseline -> IProp (dominantBaseline :: String | r) i
 dominantBaseline = attr (H.AttrName "dominant-baseline") <<< printBaseline
 
 dur :: forall r i. Duration -> IProp (dur :: String | r) i
