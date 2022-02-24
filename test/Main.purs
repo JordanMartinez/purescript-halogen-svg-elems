@@ -3,6 +3,7 @@ module Test.Main where
 import Prelude
 
 import Data.Foldable (for_)
+import Data.Tuple (Tuple(..))
 import Effect (Effect)
 import Effect.Aff (Aff, launchAff_)
 import Halogen (ClassName(..), Component)
@@ -81,6 +82,16 @@ rootComp = Hooks.component \_ _ -> Hooks.do
               , SA.x 20.0
               , SA.fill $ Named "white"
               , SA.stroke $ Named "red"
+              ]
+          ]
+      , testSvg Large
+          [ SE.polygon
+              [ SA.points
+                  [ Tuple 0.0 0.0
+                  , Tuple 0.0 1.0
+                  , Tuple 1.0 1.0
+                  , Tuple 1.0 0.0
+                  ]
               ]
           ]
       ]
