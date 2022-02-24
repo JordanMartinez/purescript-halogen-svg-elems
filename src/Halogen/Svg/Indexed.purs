@@ -227,14 +227,14 @@ type SVGline
 type SVGpolyline
   = GlobalAttributes + CanBeMaskedAttributes + StrokeAttributes + StokeEndAttributes + MarkerAttributes
   +
-    ( points :: Array (Tuple Number Number)
+    ( points :: String
     , pathLength :: Number
     )
 
 type SVGpolygon
   = GlobalAttributes + CanBeMaskedAttributes + StrokeAttributes + StokeEndAttributes + MarkerAttributes
   +
-    ( points :: Array (Tuple Number Number)
+    ( points :: String
     , pathLength :: Number
     )
 
