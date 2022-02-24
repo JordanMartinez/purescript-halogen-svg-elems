@@ -13,7 +13,6 @@ You can edit this file as you like.
   , "maybe"
   , "newtype"
   , "prelude"
-  , "psci-support"
   , "safe-coerce"
   , "strings"
   , "tuples"
