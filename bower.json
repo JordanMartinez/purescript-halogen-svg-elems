@@ -11,10 +11,10 @@
     "output"
   ],
   "dependencies": {
-    "purescript-halogen": "^6.0.0"
+    "purescript-halogen": "^7.0.0"
   },
   "devDependencies": {
-    "purescript-psci-support": "^5.0.0"
+    "purescript-psci-support": "^6.0.0"
   },
   "repository": {
     "type": "git",
