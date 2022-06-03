@@ -33,7 +33,6 @@ module Halogen.Svg.Indexed
   , SVGuse
   ) where
 
-import Data.Tuple (Tuple)
 import Type.Row (type (+))
 import Web.UIEvent.KeyboardEvent (KeyboardEvent)
 import Web.UIEvent.MouseEvent (MouseEvent)
