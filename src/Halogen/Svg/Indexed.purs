@@ -5,7 +5,7 @@ module Halogen.Svg.Indexed
   , GlobalEventAttributes
   , GlobalAttributes
   , StrokeAttributes
-  , StokeEndAttributes
+  , StrokeEndAttributes
   , StrokeJoinAttributes
   , FillAttributes
   , MarkerAttributes
@@ -100,7 +100,7 @@ type StrokeAttributes r =
   | r
   )
 
-type StokeEndAttributes r =
+type StrokeEndAttributes r =
   ( strokeLineCap :: String
   | r
   )
@@ -141,7 +141,7 @@ type CanBeMaskedAttributes r =
   )
 
 type AllPresentationAttributes r
-  = StrokeAttributes + StrokeJoinAttributes + StokeEndAttributes
+  = StrokeAttributes + StrokeJoinAttributes + StrokeEndAttributes
   + FillAttributes
   + FontAttributes
   + MarkerAttributes
@@ -215,7 +215,7 @@ type SVGellipse
     )
 
 type SVGline
-  = GlobalAttributes + CanBeMaskedAttributes + StrokeAttributes + StokeEndAttributes + MarkerAttributes
+  = GlobalAttributes + CanBeMaskedAttributes + StrokeAttributes + StrokeEndAttributes + MarkerAttributes
   +
     ( x1 :: Number
     , y1 :: Number
@@ -225,21 +225,21 @@ type SVGline
     )
 
 type SVGpolyline
-  = GlobalAttributes + CanBeMaskedAttributes + StrokeAttributes + StokeEndAttributes + MarkerAttributes
+  = GlobalAttributes + CanBeMaskedAttributes + StrokeAttributes + StrokeEndAttributes + MarkerAttributes
   +
     ( points :: String
     , pathLength :: Number
     )
 
 type SVGpolygon
-  = GlobalAttributes + CanBeMaskedAttributes + StrokeAttributes + StokeEndAttributes + MarkerAttributes
+  = GlobalAttributes + CanBeMaskedAttributes + StrokeAttributes + StrokeEndAttributes + MarkerAttributes
   +
     ( points :: String
     , pathLength :: Number
     )
 
 type SVGpath
-  = GlobalAttributes + CanBeMaskedAttributes + StrokeAttributes + StokeEndAttributes
+  = GlobalAttributes + CanBeMaskedAttributes + StrokeAttributes + StrokeEndAttributes
   + StrokeJoinAttributes
   + FillAttributes
   + MarkerAttributes
@@ -279,7 +279,7 @@ type SVGrect
     )
 
 type SVGtext
-  = GlobalAttributes + CanBeMaskedAttributes + StrokeAttributes + StokeEndAttributes
+  = GlobalAttributes + CanBeMaskedAttributes + StrokeAttributes + StrokeEndAttributes
   + StrokeJoinAttributes
   + FillAttributes
   + FontAttributes
@@ -292,7 +292,7 @@ type SVGtext
     )
 
 type SVGuse
-  = GlobalAttributes + CanBeMaskedAttributes + StrokeAttributes + StokeEndAttributes
+  = GlobalAttributes + CanBeMaskedAttributes + StrokeAttributes + StrokeEndAttributes
   + StrokeJoinAttributes
   + FillAttributes
   + FontAttributes
