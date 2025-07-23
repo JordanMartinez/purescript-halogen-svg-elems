@@ -1,0 +1,30 @@
+package:
+  name: halogen-svg-elems
+  dependencies:
+    - aff
+    - arrays
+    - effect
+    - foldable-traversable
+    - halogen
+    - halogen-hooks
+    - heterogeneous
+    - maybe
+    - newtype
+    - prelude
+    - variant
+    - safe-coerce
+    - strings
+    - tuples
+    - typelevel-prelude
+    - web-dom
+    - web-uievents
+
+  test:
+    dependencies:
+      - spec
+      - spec-discovery
+    main: Test.Main
+
+workspace:
+  package_set:
+    registry: 65.2.0

@@ -1,0 +1,27 @@
+package:
+  name: svg-specification-tests
+  dependencies:
+    - aff
+    - arrays
+    - effect
+    - foldable-traversable
+    - halogen
+    - halogen-hooks
+    - halogen-svg-elems
+    - heterogeneous
+    - maybe
+    - newtype
+    - prelude
+    - safe-coerce
+    - strings
+    - tuples
+    - typelevel-prelude
+    - web-dom
+    - web-uievents
+
+  bundle:
+    minify: false
+    module: SvgSpecificationTests.Main
+    outfile: "dist/test.js"
+    platform: browser
+    type: "app"
