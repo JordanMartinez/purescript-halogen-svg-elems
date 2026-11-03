@@ -10,7 +10,7 @@
     "svg"
   ],
   "scripts": {
-    "test": "spago bundle-app -m Test.Main -t dist/test.js",
+    "test": "spago build && esbuild output/Test.Main/index.js --bundle --format=iife --global-name=TestMain --footer:js=\"TestMain.main();\" --outfile=dist/test.js",
     "format": "purs-tidy format-in-place src test"
   }
 }
