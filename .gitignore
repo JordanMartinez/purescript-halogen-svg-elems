@@ -11,3 +11,4 @@ package-lock.json
 .purs*
 
 /dist/test.js
+/spago.lock
